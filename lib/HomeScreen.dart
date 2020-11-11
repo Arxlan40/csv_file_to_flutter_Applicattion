@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:spreadsheet/About.dart';
+import 'package:spreadsheet/Favourite.dart';
 import 'package:spreadsheet/test.dart';
 
 import 'Contact.dart';
@@ -131,30 +132,35 @@ class HomeScreen extends StatelessWidget {
                           )),
                     ),
                   ),
-                  Container(
-                    width: _width / 2,
-                    height: 200,
-                    child: Card(
-                        color: Color(0xFF800000),
-                        elevation: 10,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              'assets/files/fav.png',
-                              height: 150,
-                              width: 120,
-                            ),
-                            Text(
-                              'PREFERITA',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white,
-                                  fontFamily: "sans"),
-                            ),
-                          ],
-                        )),
+                  GestureDetector(
+                    onTap: (){
+                      Get.to(Favourite());
+                    },
+                    child: Container(
+                      width: _width / 2,
+                      height: 200,
+                      child: Card(
+                          color: Color(0xFF800000),
+                          elevation: 10,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                'assets/files/fav.png',
+                                height: 150,
+                                width: 120,
+                              ),
+                              Text(
+                                'PREFERITA',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white,
+                                    fontFamily: "sans"),
+                              ),
+                            ],
+                          )),
+                    ),
                   )
                 ],
               ),

@@ -4,10 +4,11 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:json_table/json_table.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:spreadsheet/Detail%20Screen.dart';
 import 'package:spreadsheet/model.dart';
 import 'package:tabbar/tabbar.dart';
-
+import 'dart:io';
 class MyHomePage extends StatefulWidget {
   String type;
 
@@ -25,6 +26,8 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Red> whitedata;
 
   bool loading = false;
+
+
 
   onSearchTextChanged(String text) async {
     _searchResult.clear();
@@ -190,6 +193,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 return GestureDetector(
                                   onTap: () {
                                     Get.to(DetailScreen(
+                                      fav: false,
+
                                       webAdress:
                                           _searchResult[index].webAddress,
                                       wineColor: _searchResult[index].color,
@@ -280,6 +285,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 return GestureDetector(
                                   onTap: () {
                                     Get.to(DetailScreen(
+                                      fav: false,
+
                                       webAdress: reddata[index].webAddress,
                                       wineColor: reddata[index].color,
                                       wineRegion: reddata[index].wineRegion,
@@ -386,6 +393,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 return GestureDetector(
                                   onTap: () {
                                     Get.to(DetailScreen(
+                                      fav: false,
+
                                       webAdress:
                                           _searchResultwhite[index].webAddress,
                                       wineColor:
@@ -481,6 +490,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 return GestureDetector(
                                   onTap: () {
                                     Get.to(DetailScreen(
+                                      fav: false,
+
                                       webAdress: whitedata[index].webAddress,
                                       wineColor: whitedata[index].color,
                                       wineRegion: whitedata[index].wineRegion,
