@@ -13,8 +13,8 @@ import 'dart:io';
 class MyHomePage extends StatefulWidget {
   String type;
   String title;
-
-  MyHomePage({this.type, this.title});
+String country;
+  MyHomePage({this.type, this.title,this.country});
 
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -28,6 +28,15 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Red> whitedata;
 
   bool loading = false;
+  void _filter(List<Red> item) {
+    setState(() {
+     widget.type == "redgrap" || widget.type =="redcount" ?
+      reddata =
+          item.where((value) => value.country == widget.country).toList(): whitedata =
+         item.where((value) => value.country == widget.country).toList();
+
+    });
+  }
 
   onSearchTextChanged(String text) async {
     _searchResult.clear();
@@ -108,6 +117,10 @@ class _MyHomePageState extends State<MyHomePage> {
       whitedata = whitelists;
       loading = false;
     });
+    widget.type == "redgrap" || widget.type =="redcount" ?
+    _filter(reddata):
+    _filter(whitedata);
+
     // } catch (e) {
     // }
   }

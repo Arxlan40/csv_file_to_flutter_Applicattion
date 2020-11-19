@@ -5,6 +5,7 @@ import 'package:spreadsheet/Favourite.dart';
 import 'package:spreadsheet/test.dart';
 
 import 'Contact.dart';
+import 'Country.dart';
 import 'localstorage.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -39,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: (){
-                      Get.to(MyHomePage(type: "redgrap",title: "RED WINE BY GRAPE",));
+                      Get.to(Countries(type: "redgrap",title: "RED WINE BY GRAPE",));
                     },
                     child: Container(
                       width: _width / 2,
@@ -69,7 +70,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: (){
-                      Get.to(MyHomePage(type: "whitegrap",title: "WHITE WINE BY GRAPE"));
+                      Get.to(Countries(type: "whitegrap",title: "WHITE WINE BY GRAPE"));
                     },
                     child: Container(
                       width: _width / 2,
@@ -104,7 +105,7 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: (){
-                      Get.to(MyHomePage(type: "redcount",title: "RED WINE BY COUNTRY"));
+                      Get.to(Countries(type: "redcount",title: "RED WINE BY COUNTRY"));
                     },
                     child: Container(
                       width: _width / 2,
@@ -134,7 +135,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: (){
-                      Get.to(MyHomePage(type: "whitecount",title: "RED WINE BY COUNTRY"));
+                      Get.to(Countries(type: "whitecount",title: "WHITE WINE BY COUNTRY"));
                     },
                     child: Container(
                       width: _width / 2,

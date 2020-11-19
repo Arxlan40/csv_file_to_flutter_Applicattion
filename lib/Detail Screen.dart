@@ -244,12 +244,14 @@ class _DetailScreenState extends State<DetailScreen> {
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),),
-                Text(
-                  "${widget.suggestedBottle}",style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.black,
-                ),
+                Flexible(
+                  child: Text(
+                    "${widget.suggestedBottle}",style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black,
+                  ),
+                  ),
                 ),
               ],),
             ),  Padding(
@@ -340,12 +342,14 @@ class _DetailScreenState extends State<DetailScreen> {
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),),
-                Text(
-                  "${widget.note}",style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.black,
-                ),
+                Flexible(
+                  child: Text(
+                    "${widget.note}",style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black,
+                  ),
+                  ),
                 ),
               ],),
             ),
@@ -357,12 +361,14 @@ class _DetailScreenState extends State<DetailScreen> {
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),),
-                Text(
-                  "${widget.addnote}",style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.black,
-                ),
+                Flexible(
+                  child: Text(
+                    "${widget.addnote}",style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black,
+                  ),
+                  ),
                 ),
               ],),
             ),
