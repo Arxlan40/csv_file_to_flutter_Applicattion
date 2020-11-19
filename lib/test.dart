@@ -225,7 +225,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               //    padding: EdgeInsets.only(top: 10, left: 6, right: 6),
                               scrollDirection: Axis.vertical,
                               itemBuilder: (BuildContext context, index) {
-                                return GestureDetector(
+                                return InkWell(
                                   onTap: () {
                                     Get.to(DetailScreen(
                                       fav: false,
@@ -307,7 +307,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               //    padding: EdgeInsets.only(top: 10, left: 6, right: 6),
                               scrollDirection: Axis.vertical,
                               itemBuilder: (BuildContext context, index) {
-                                return GestureDetector(
+                                return InkWell(
                                   onTap: () {
                                     Get.to(DetailScreen(
                                       fav: false,
@@ -406,7 +406,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   //    padding: EdgeInsets.only(top: 10, left: 6, right: 6),
                                   scrollDirection: Axis.vertical,
                                   itemBuilder: (BuildContext context, index) {
-                                    return GestureDetector(
+                                    return InkWell(
                                       onTap: () {
                                         Get.to(DetailScreen(
                                           fav: false,
@@ -502,7 +502,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   //    padding: EdgeInsets.only(top: 10, left: 6, right: 6),
                                   scrollDirection: Axis.vertical,
                                   itemBuilder: (BuildContext context, index) {
-                                    return GestureDetector(
+                                    return InkWell(
                                       onTap: () {
                                         Get.to(DetailScreen(
                                           fav: false,
@@ -611,7 +611,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                       scrollDirection: Axis.vertical,
                                       itemBuilder:
                                           (BuildContext context, index) {
-                                        return GestureDetector(
+                                        return InkWell(
                                           onTap: () {
                                             Get.to(DetailScreen(
                                               fav: false,
@@ -742,7 +742,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                       scrollDirection: Axis.vertical,
                                       itemBuilder:
                                           (BuildContext context, index) {
-                                        return GestureDetector(
+                                        return InkWell(
                                           onTap: () {
                                             Get.to(DetailScreen(
                                               fav: false,
@@ -886,7 +886,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           scrollDirection: Axis.vertical,
                                           itemBuilder:
                                               (BuildContext context, index) {
-                                            return GestureDetector(
+                                            return InkWell(
                                               onTap: () {
                                                 Get.to(DetailScreen(
                                                   fav: false,
@@ -1032,7 +1032,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           scrollDirection: Axis.vertical,
                                           itemBuilder:
                                               (BuildContext context, index) {
-                                            return GestureDetector(
+                                            return InkWell(
                                               onTap: () {
                                                 Get.to(DetailScreen(
                                                   fav: false,
@@ -1329,7 +1329,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                               itemBuilder:
                                                   (BuildContext context,
                                                       index) {
-                                                return GestureDetector(
+                                                return InkWell(
                                                   onTap: () {
                                                     Get.to(DetailScreen(
                                                       fav: false,
@@ -1479,7 +1479,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                               itemBuilder:
                                                   (BuildContext context,
                                                       index) {
-                                                return GestureDetector(
+                                                return InkWell(
                                                   onTap: () {
                                                     Get.to(DetailScreen(
                                                       fav: false,
@@ -1627,7 +1627,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                               itemBuilder:
                                                   (BuildContext context,
                                                       index) {
-                                                return GestureDetector(
+                                                return InkWell(
                                                   onTap: () {
                                                     Get.to(DetailScreen(
                                                       fav: false,
