@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/root_widget.dart';
 import 'package:json_table/json_table.dart';
 import 'package:spreadsheet/Detail%20Screen.dart';
+import 'package:spreadsheet/Splashscreen.dart';
 import 'package:spreadsheet/file.dart';
 import 'package:spreadsheet/test.dart';
 
@@ -17,7 +18,7 @@ void main() {
 
   runApp(new GetMaterialApp(
     debugShowCheckedModeBanner: false,
-    home: new HomeScreen(),
+    home: new SplashScreen(),
     theme: ThemeData(
       primarySwatch: Colors.red,
     ),

@@ -22,6 +22,8 @@ class DetailScreen extends StatefulWidget {
   String suggestedBottle;
   String webAdress;
   String note;
+  String addnote;
+
   bool fav;
 
   DetailScreen(
@@ -35,6 +37,7 @@ class DetailScreen extends StatefulWidget {
       this.aging,
       this.grapeVar,
       this.note,
+        this.addnote,
       this.webAdress,
       this.wineColor});
 
@@ -129,121 +132,239 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(150),
-        child: AppBar(
-          backgroundColor: Color(0xFF44281d),
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(Icons.arrow_back),
-          ),
-          flexibleSpace: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 50.0),
-                child: Text(
-                  "Wine Created By ${widget.country}",
-                  style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white),
-                ),
-              ),
-              Text(
-                "${widget.wineColor} Wine",
-                style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w300,
-                    color: Colors.white),
-              )
-            ],
-          ),
-          title: widget.fav ? SizedBox(): ListTile(
-              trailing: IconButton(
-            onPressed: () async {
-              _writeJson();
-              final file = await _localFile;
-              _fileExists = await file.exists();
-              Fluttertoast.showToast(msg: "Aggiunto ai preferiti");
-            },
-            icon: Icon(
-              Icons.favorite_border,
-              color: Colors.white,
-            ),
-          )),
+      appBar: AppBar(
+        backgroundColor: Color(0xFF800000),
+        elevation: 5,
+        centerTitle: true,
+        title: Text(
+          "PAOLO SCAVINO",
+          style:
+          TextStyle(fontSize: 18, fontFamily: "sans", color: Colors.white),
         ),
       ),
+
+      // PreferredSize(
+      //   preferredSize: Size.fromHeight(150),
+      //   child: AppBar(
+      //     backgroundColor: Color(0xFF44281d),
+      //     leading: IconButton(
+      //       onPressed: () {
+      //         Navigator.pop(context);
+      //       },
+      //       icon: Icon(Icons.arrow_back),
+      //     ),
+      //     flexibleSpace: Column(
+      //       mainAxisAlignment: MainAxisAlignment.center,
+      //       children: [
+      //         Padding(
+      //           padding: const EdgeInsets.only(top: 50.0),
+      //           child: Text(
+      //             "Wine Created By ${widget.country}",
+      //             style: TextStyle(
+      //                 fontSize: 24,
+      //                 fontWeight: FontWeight.w500,
+      //                 color: Colors.white),
+      //           ),
+      //         ),
+      //         Text(
+      //           "${widget.wineColor} Wine",
+      //           style: TextStyle(
+      //               fontSize: 22,
+      //               fontWeight: FontWeight.w300,
+      //               color: Colors.white),
+      //         )
+      //       ],
+      //     ),
+      //     title: widget.fav ? SizedBox(): ListTile(
+      //     //     trailing: IconButton(
+      //     //   onPressed: () async {
+      //     //     _writeJson();
+      //     //     final file = await _localFile;
+      //     //     _fileExists = await file.exists();
+      //     //     Fluttertoast.showToast(msg: "Aggiunto ai preferiti");
+      //     //   },
+      //     //   icon: Icon(
+      //     //     Icons.favorite_border,
+      //     //     color: Colors.white,
+      //     //   ),
+      //     // )),
+      //     )  ),
+      // ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            ListTile(
-              title: Text("Wine Color"),
-              subtitle: Text(
-                "${widget.wineColor}",
-              ),
+            // ListTile(
+            //   title: Text("Wine Color"),
+            //   subtitle: Text(
+            //     "${widget.wineColor}",
+            //   ),
+            // ),
+
+            Padding(
+              padding: const EdgeInsets.only(top:30.0,left:15),
+              child: Row(children: [
+                Text("WINE TYPE : ", style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                    ),),
+                Text(
+                  "${widget.wineType}",style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                ),
+                ),
+              ],),
             ),
-            ListTile(
-              title: Text("Wine Type"),
-              subtitle: Text(
-                "${widget.wineType}",
-              ),
+
+
+            Padding(
+              padding: const EdgeInsets.only(top:25.0,left:15),
+              child: Row(children: [
+                Text("GRAPE VARIETY : ", style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),),
+                Text(
+                  "${widget.grapeVar}",style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                ),
+                ),
+              ],),
             ),
-            ListTile(
-              title: Text("Country"),
-              subtitle: Text(
-                "${widget.country}",
-              ),
+            Padding(
+              padding: const EdgeInsets.only(top:25.0,left:15),
+              child: Row(children: [
+                Text("SUGGESTED BOTTLE : ", style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),),
+                Text(
+                  "${widget.suggestedBottle}",style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                ),
+                ),
+              ],),
+            ),  Padding(
+              padding: const EdgeInsets.only(top:25.0,left:15),
+              child: Row(children: [
+                Text("POTENTIAL AGING : ", style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),),
+                Text(
+                  "${widget.aging}",style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                ),
+                ),
+              ],),
+            ),  Padding(
+              padding: const EdgeInsets.only(top:25.0,left:15),
+              child: Row(children: [
+                Text("VILLAGE : ", style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),),
+                Text(
+                  "${widget.village}",style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                ),
+                ),
+              ],),
+            ),  Padding(
+              padding: const EdgeInsets.only(top:25.0,left:15),
+              child: Row(children: [
+                Text("WINE REGION : ", style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),),
+                Text(
+                  "${widget.wineRegion}",style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                ),
+                ),
+              ],),
+            ),  Padding(
+              padding: const EdgeInsets.only(top:25.0,left:15),
+              child: Row(children: [
+                Text("COUNTRY : ", style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),),
+                Text(
+                  "${widget.country}",style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                ),
+                ),
+              ],),
+            ),  Padding(
+              padding: const EdgeInsets.only(top:25.0,left:15),
+              child: Row(children: [
+                Text("WEBSITE : ", style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),),
+                Text(
+                  "${widget.webAdress}",style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                ),
+                ),
+              ],),
+            ),  Padding(
+              padding: const EdgeInsets.only(top:25.0,left:15),
+              child: Row(children: [
+                Text("NOTE : ", style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),),
+                Text(
+                  "${widget.note}",style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                ),
+                ),
+              ],),
             ),
-            ListTile(
-              title: Text("Wine Region"),
-              subtitle: Text(
-                "${widget.wineRegion}",
-              ),
-            ),
-            ListTile(
-              title: Text("Village"),
-              subtitle: Text(
-                "${widget.village}",
-              ),
-            ),
-            ListTile(
-              title: Text("Grape Varieties"),
-              subtitle: Text(
-                "${widget.grapeVar}",
-              ),
-            ),
-            ListTile(
-              title: Text("Producer"),
-              subtitle: Text(
-                "${widget.producer}",
-              ),
-            ),
-            ListTile(
-              title: Text("Aging in Years"),
-              subtitle: Text(
-                "${widget.aging}",
-              ),
-            ),
-            ListTile(
-              title: Text("Suggested Bottle"),
-              subtitle: Text(
-                "${widget.suggestedBottle}",
-              ),
-            ),
-            ListTile(
-              title: Text("Web Address"),
-              subtitle: Text(
-                "${widget.webAdress != null ? widget.webAdress : "Not Found"}",
-              ),
-            ),
-            ListTile(
-              title: Text("Note"),
-              subtitle: Text(
-                "${widget.note != null ? widget.note : "Not Found"}",
-              ),
+            Padding(
+              padding: const EdgeInsets.only(top:25.0,left:15),
+              child: Row(children: [
+                Text("ADDITIONAL NOTE : ", style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),),
+                Text(
+                  "${widget.addnote}",style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                ),
+                ),
+              ],),
             ),
           ],
         ),

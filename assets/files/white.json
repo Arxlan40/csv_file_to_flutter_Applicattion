@@ -469,6 +469,8 @@
             "Color": "White",
             "Aging in Years": "1 - 3",
             "Wine Type": "Muscat",
+            "Grape Varieties": "Sauternes",
+
             "Village": "Turckheim",
             "Wine Region": "Alsace",
             "Country": "France",
@@ -484,6 +486,8 @@
             "Aging in Years": "1 - 3",
             "Wine Type": "Gewurztraminer ",
             "Village": "Wettolsheim",
+            "Grape Varieties": "Sauternes",
+
             "Wine Region": "Alsace",
             "Country": "France",
             "Producer": "Barmes Buecher",
@@ -498,6 +502,8 @@
             "Wine Type": "Riesling ",
             "Village": "Epfig",
             "Wine Region": "Alsace",
+            "Grape Varieties": "Sauternes",
+
             "Country": "France",
             "Producer": "Andre' Ostertag",
             "Suggested Bottle": "Riesling Grand Cru",
@@ -511,6 +517,8 @@
             "Wine Type": "Riesling",
             "Village": "Turckheim",
             "Wine Region": "Alsace",
+            "Grape Varieties": "Sauternes",
+
             "Country": "France",
             "Producer": "Olivier Humbrecht",
             "Suggested Bottle": "Riesling Herrenweg Turckheim",
@@ -524,6 +532,8 @@
             "Village": "Turckheim",
             "Wine Region": "Alsace",
             "Country": "France",
+            "Grape Varieties": "Sauternes",
+
             "Producer": "Olivier Humbrecht",
             "Suggested Bottle": "Gewurztraminer",
             "web address": "www.zindhumbrecht.fr",
@@ -534,6 +544,8 @@
             "Aging in Years": "1 - 3",
             "Wine Type": "Gewurztraminer",
             "Village": "Turckheim",
+            "Grape Varieties": "Sauternes",
+
             "Wine Region": "Alsace",
             "Country": "France",
             "Producer": "Olivier Humbrecht",
@@ -546,6 +558,8 @@
             "Aging in Years": "2 - 3",
             "Wine Type": "Pinot Gris",
             "Village": "Andre' Ostertag",
+            "Grape Varieties": "Sauternes",
+
             "Wine Region": "Alsace",
             "Country": "France",
             "Producer": "Andre' Ostertag",
@@ -558,6 +572,8 @@
             "Aging in Years": "1 - 3",
             "Wine Type": "Gewurztraminer ",
             "Village": "Ribeauville",
+            "Grape Varieties": "Sauternes",
+
             "Wine Region": "Alsace",
             "Country": "France",
             "Producer": "Maison Trimbach",
@@ -573,6 +589,7 @@
             "Grape Varieties": "Riesling",
             "Village": "Urzig",
             "Wine Region": "Moselle",
+
             "Country": "Germany",
             "Producer": "Joh. Jos. Christoffel",
             "Suggested Bottle": "Riesling Auslese",

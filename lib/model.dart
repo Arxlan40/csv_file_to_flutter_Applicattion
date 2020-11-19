@@ -38,6 +38,7 @@ class Red {
     this.notes,
     this.webAddress,
     this.serial,
+    this.addnote,
   });
 
   String color;
@@ -52,6 +53,7 @@ class Red {
   String notes;
   String webAddress;
   String serial;
+  String addnote;
 
   factory Red.fromJson(Map<String, dynamic> json) => Red(
     color: json["Color"],
@@ -66,6 +68,7 @@ class Red {
     notes: json["Notes"],
     webAddress: json["web address"],
       serial: json["Serial"],
+    addnote:json['Additional Notes'],
   );
 
   Map<String, dynamic> toJson() => {
@@ -81,5 +84,6 @@ class Red {
     "Notes": notes,
     "web address": webAddress,
     "Serial": serial,
+    "Additional Notes":addnote,
   };
 }

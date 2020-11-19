@@ -60,7 +60,7 @@ flutter:
     - assets/files/wine.jpg
     - assets/files/
     - assets/files/splash.png
-    - assets/splash.png
+    - assets/splashs.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets
