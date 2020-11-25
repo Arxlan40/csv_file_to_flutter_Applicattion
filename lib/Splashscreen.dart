@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:spreadsheet/HomeScreen.dart';
 
+import 'home.dart';
+
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -25,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void startTimer() {
     Timer(Duration(seconds: 3), () {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => HomeScreen()));
+          context, MaterialPageRoute(builder: (context) => HomeWine()));
     });
   }
   double _height;

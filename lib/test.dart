@@ -7,6 +7,7 @@ import 'package:json_table/json_table.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:spreadsheet/Detail%20Screen.dart';
 import 'package:spreadsheet/model.dart';
+import 'package:spreadsheet/suggestedbottle.dart';
 import 'package:tabbar/tabbar.dart';
 import 'dart:io';
 
@@ -29,11 +30,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   bool loading = false;
   void _filter(List<Red> item) {
+    final ids = reddata.map((e) => e.suggestedBottle).toSet();
+    final idsw = whitedata.map((e) => e.suggestedBottle).toSet();
+
     setState(() {
      widget.type == "redgrap" || widget.type =="redcount" ?
       reddata =
-          item.where((value) => value.country == widget.country).toList(): whitedata =
-         item.where((value) => value.country == widget.country).toList();
+          item.where((value) => value.country == widget.country).toList()  : widget.type == "whitegrap" || widget.type =="whitecount" ? whitedata =
+         item.where((value) => value.country == widget.country).toList() : SizedBox();
+     widget.type == "redcount" ?
+     reddata.retainWhere((x) => ids.remove(x.suggestedBottle)): widget.type == "whitecount" ? whitedata.retainWhere((x) => idsw.remove(x.suggestedBottle)) :SizedBox();
 
     });
   }
@@ -55,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
           })
         : reddata.forEach((userDetail) {
             if (userDetail.country.toLowerCase().contains(text.toLowerCase()) ||
-                userDetail.producer.toLowerCase().contains(text.toLowerCase()))
+                userDetail.suggestedBottle.toLowerCase().contains(text.toLowerCase()))
               _searchResult.add(userDetail);
           });
     setState(() {});
@@ -77,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
           })
         : whitedata.forEach((userDetail) {
             if (userDetail.country.toLowerCase().contains(text.toLowerCase()) ||
-                userDetail.producer.toLowerCase().contains(text.toLowerCase()))
+                userDetail.suggestedBottle.toLowerCase().contains(text.toLowerCase()))
               _searchResultwhite.add(userDetail);
           });
     setState(() {});
@@ -275,7 +281,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     ),
                                                     Text(
                                                       _searchResult[index]
-                                                          .producer,
+                                                          .village,
                                                       style: TextStyle(
                                                           fontSize: 14,
                                                           color: Colors.grey),
@@ -353,7 +359,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                       ),
                                                     ),
                                                     Text(
-                                                      reddata[index].country,
+                                                      reddata[index].village,
                                                       style: TextStyle(
                                                           fontSize: 14,
                                                           color: Colors.grey),
@@ -469,7 +475,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                         Text(
                                                           _searchResultwhite[
                                                                   index]
-                                                              .country,
+                                                              .village,
                                                           style: TextStyle(
                                                               fontSize: 14,
                                                               color:
@@ -555,7 +561,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                         ),
                                                         Text(
                                                           whitedata[index]
-                                                              .country,
+                                                              .village,
                                                           style: TextStyle(
                                                               fontSize: 14,
                                                               color:
@@ -613,32 +619,34 @@ class _MyHomePageState extends State<MyHomePage> {
                                           (BuildContext context, index) {
                                         return InkWell(
                                           onTap: () {
-                                            Get.to(DetailScreen(
-                                              fav: false,
-                                              addnote:_searchResult[index]
-                                                  .addnote ,
-                                              webAdress: _searchResult[index]
-                                                  .webAddress,
-                                              wineColor:
-                                                  _searchResult[index].color,
-                                              wineRegion: _searchResult[index]
-                                                  .wineRegion,
-                                              wineType:
-                                                  _searchResult[index].wineType,
-                                              country:
-                                                  _searchResult[index].country,
-                                              village:
-                                                  _searchResult[index].village,
-                                              aging: _searchResult[index]
-                                                  .agingInYears,
-                                              note: _searchResult[index].notes,
-                                              grapeVar: _searchResult[index]
-                                                  .grapeVarieties,
+                                            Get.to(Suggestedbottle(
+                                              // fav: false,
+                                              // addnote:_searchResult[index]
+                                              //     .addnote ,
+                                              // webAdress: _searchResult[index]
+                                              //     .webAddress,
+                                              // wineColor:
+                                              //     _searchResult[index].color,
+                                              // wineRegion: _searchResult[index]
+                                              //     .wineRegion,
+                                              // wineType:
+                                              //     _searchResult[index].wineType,
+                                              // country:
+                                              //     _searchResult[index].country,
+                                              // village:
+                                              //     _searchResult[index].village,
+                                              // aging: _searchResult[index]
+                                              //     .agingInYears,
+                                              // note: _searchResult[index].notes,
+                                              // grapeVar: _searchResult[index]
+                                              //     .grapeVarieties,
+                                              // producer:
+                                              //     _searchResult[index].producer,
                                               producer:
-                                                  _searchResult[index].producer,
-                                              suggestedBottle:
                                                   _searchResult[index]
                                                       .suggestedBottle,
+                                              type: widget.type,
+                                              title: widget.title,
                                             ));
                                           },
                                           child: Column(
@@ -665,24 +673,24 @@ class _MyHomePageState extends State<MyHomePage> {
                                                               CrossAxisAlignment
                                                                   .start,
                                                           children: <Widget>[
-                                                            Text(
-                                                              widget.type ==
-                                                                      "LE AZIENDE"
-                                                                  ? _searchResult[
-                                                                          index]
-                                                                      .producer
-                                                                  : widget.type ==
-                                                                          "I VINI"
-                                                                      ? _searchResult[
-                                                                              index]
-                                                                          .color
-                                                                      : _searchResult[
-                                                                              index]
-                                                                          .country,
-                                                              style: TextStyle(
-                                                                fontSize: 16,
-                                                              ),
-                                                            ),
+                                                            // Text(
+                                                            //   widget.type ==
+                                                            //           "LE AZIENDE"
+                                                            //       ? _searchResult[
+                                                            //               index]
+                                                            //           .producer
+                                                            //       : widget.type ==
+                                                            //               "I VINI"
+                                                            //           ? _searchResult[
+                                                            //                   index]
+                                                            //               .color
+                                                            //           : _searchResult[
+                                                            //                   index]
+                                                            //               .wineType,
+                                                            //   style: TextStyle(
+                                                            //     fontSize: 16,
+                                                            //   ),
+                                                            // ),
                                                             widget.type ==
                                                                     "I VINI"
                                                                 ? Text(
@@ -706,11 +714,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                                                           .country
                                                                       : _searchResult[
                                                                               index]
-                                                                          .producer,
+                                                                          .suggestedBottle,
                                                               style: TextStyle(
                                                                   fontSize: 14,
                                                                   color: Colors
-                                                                      .grey),
+                                                                      .black),
                                                             ),
                                                           ],
                                                         ),
@@ -744,25 +752,27 @@ class _MyHomePageState extends State<MyHomePage> {
                                           (BuildContext context, index) {
                                         return InkWell(
                                           onTap: () {
-                                            Get.to(DetailScreen(
-                                              fav: false,
-                                              addnote: reddata[index].addnote,
-                                              webAdress:
-                                                  reddata[index].webAddress,
-                                              wineColor: reddata[index].color,
-                                              wineRegion:
-                                                  reddata[index].wineRegion,
-                                              wineType: reddata[index].wineType,
-                                              country: reddata[index].country,
-                                              village: reddata[index].village,
-                                              aging:
-                                                  reddata[index].agingInYears,
-                                              note: reddata[index].notes,
-                                              grapeVar:
-                                                  reddata[index].grapeVarieties,
-                                              producer: reddata[index].producer,
-                                              suggestedBottle: reddata[index]
+                                            Get.to(Suggestedbottle(
+                                              // fav: false,
+                                              // addnote: reddata[index].addnote,
+                                              // webAdress:
+                                              //     reddata[index].webAddress,
+                                              // wineColor: reddata[index].color,
+                                              // wineRegion:
+                                              //     reddata[index].wineRegion,
+                                              // wineType: reddata[index].wineType,
+                                              // country: reddata[index].country,
+                                              // village: reddata[index].village,
+                                              // aging:
+                                              //     reddata[index].agingInYears,
+                                              // note: reddata[index].notes,
+                                              // grapeVar:
+                                              //     reddata[index].grapeVarieties,
+                                              // producer: reddata[index].producer,
+                                              producer: reddata[index]
                                                   .suggestedBottle,
+                                              type: widget.type,
+                                              title: widget.title,
                                             ));
                                           },
                                           child: Column(
@@ -789,23 +799,23 @@ class _MyHomePageState extends State<MyHomePage> {
                                                               CrossAxisAlignment
                                                                   .start,
                                                           children: <Widget>[
-                                                            Text(
-                                                              widget.type ==
-                                                                      "LE AZIENDE"
-                                                                  ? reddata[index]
-                                                                      .producer
-                                                                  : widget.type ==
-                                                                          "I VINI"
-                                                                      ? reddata[
-                                                                              index]
-                                                                          .color
-                                                                      : reddata[
-                                                                              index]
-                                                                          .country,
-                                                              style: TextStyle(
-                                                                fontSize: 16,
-                                                              ),
-                                                            ),
+                                                            // Text(
+                                                            //   widget.type ==
+                                                            //           "LE AZIENDE"
+                                                            //       ? reddata[index]
+                                                            //           .producer
+                                                            //       : widget.type ==
+                                                            //               "I VINI"
+                                                            //           ? reddata[
+                                                            //                   index]
+                                                            //               .color
+                                                            //           : reddata[
+                                                            //                   index]
+                                                            //               .country,
+                                                            //   style: TextStyle(
+                                                            //     fontSize: 16,
+                                                            //   ),
+                                                            // ),
                                                             widget.type ==
                                                                     "I VINI"
                                                                 ? Text(
@@ -828,11 +838,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                                                           .country
                                                                       : reddata[
                                                                               index]
-                                                                          .producer,
+                                                                          .suggestedBottle,
                                                               style: TextStyle(
                                                                   fontSize: 14,
                                                                   color: Colors
-                                                                      .grey),
+                                                                      .black),
                                                             ),
                                                           ],
                                                         ),
@@ -888,41 +898,43 @@ class _MyHomePageState extends State<MyHomePage> {
                                               (BuildContext context, index) {
                                             return InkWell(
                                               onTap: () {
-                                                Get.to(DetailScreen(
-                                                  fav: false,
-                                                  addnote:  _searchResultwhite[index]
-                                                      .addnote,
-                                                  webAdress:
-                                                      _searchResultwhite[index]
-                                                          .webAddress,
-                                                  wineColor:
-                                                      _searchResultwhite[index]
-                                                          .color,
-                                                  wineRegion:
-                                                      _searchResultwhite[index]
-                                                          .wineRegion,
-                                                  wineType:
-                                                      _searchResultwhite[index]
-                                                          .wineType,
-                                                  country:
-                                                      _searchResultwhite[index]
-                                                          .country,
-                                                  village:
-                                                      _searchResultwhite[index]
-                                                          .village,
-                                                  aging:
-                                                      _searchResultwhite[index]
-                                                          .agingInYears,
-                                                  note:
-                                                      _searchResultwhite[index]
-                                                          .notes,
-                                                  grapeVar:
-                                                      _searchResultwhite[index]
-                                                          .grapeVarieties,
+                                                Get.to(Suggestedbottle(
+                                                  // fav: false,
+                                                  // addnote:  _searchResultwhite[index]
+                                                  //     .addnote,
+                                                  // webAdress:
+                                                  //     _searchResultwhite[index]
+                                                  //         .webAddress,
+                                                  // wineColor:
+                                                  //     _searchResultwhite[index]
+                                                  //         .color,
+                                                  // wineRegion:
+                                                  //     _searchResultwhite[index]
+                                                  //         .wineRegion,
+                                                  // wineType:
+                                                  //     _searchResultwhite[index]
+                                                  //         .wineType,
+                                                  // country:
+                                                  //     _searchResultwhite[index]
+                                                  //         .country,
+                                                  // village:
+                                                  //     _searchResultwhite[index]
+                                                  //         .village,
+                                                  // aging:
+                                                  //     _searchResultwhite[index]
+                                                  //         .agingInYears,
+                                                  // note:
+                                                  //     _searchResultwhite[index]
+                                                  //         .notes,
+                                                  // grapeVar:
+                                                  //     _searchResultwhite[index]
+                                                  //         .grapeVarieties,
+                                                  // producer:
+                                                  //     _searchResultwhite[index]
+                                                  //         .producer,
+                                                  type: widget.type,
+                                                  title: widget.title,
                                                   producer:
-                                                      _searchResultwhite[index]
-                                                          .producer,
-                                                  suggestedBottle:
                                                       _searchResultwhite[index]
                                                           .suggestedBottle,
                                                 ));
@@ -954,24 +966,24 @@ class _MyHomePageState extends State<MyHomePage> {
                                                                       .start,
                                                               children: <
                                                                   Widget>[
-                                                                Text(
-                                                                  widget.type ==
-                                                                          "LE AZIENDE"
-                                                                      ? _searchResultwhite[
-                                                                              index]
-                                                                          .producer
-                                                                      : widget.type ==
-                                                                              "I VINI"
-                                                                          ? _searchResultwhite[index]
-                                                                              .color
-                                                                          : _searchResultwhite[index]
-                                                                              .country,
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        16,
-                                                                  ),
-                                                                ),
+                                                                // Text(
+                                                                //   widget.type ==
+                                                                //           "LE AZIENDE"
+                                                                //       ? _searchResultwhite[
+                                                                //               index]
+                                                                //           .producer
+                                                                //       : widget.type ==
+                                                                //               "I VINI"
+                                                                //           ? _searchResultwhite[index]
+                                                                //               .color
+                                                                //           : _searchResultwhite[index]
+                                                                //               .country,
+                                                                //   style:
+                                                                //       TextStyle(
+                                                                //     fontSize:
+                                                                //         16,
+                                                                //   ),
+                                                                // ),
                                                                 widget.type ==
                                                                         "I VINI"
                                                                     ? Text(
@@ -993,12 +1005,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                                                           ? _searchResultwhite[index]
                                                                               .country
                                                                           : _searchResultwhite[index]
-                                                                              .producer,
+                                                                              .suggestedBottle,
                                                                   style: TextStyle(
                                                                       fontSize:
                                                                           14,
                                                                       color: Colors
-                                                                          .grey),
+                                                                          .black),
                                                                 ),
                                                               ],
                                                             ),
@@ -1034,29 +1046,31 @@ class _MyHomePageState extends State<MyHomePage> {
                                               (BuildContext context, index) {
                                             return InkWell(
                                               onTap: () {
-                                                Get.to(DetailScreen(
-                                                  fav: false,
-                                                  webAdress: whitedata[index]
-                                                      .webAddress,
-                                                  wineColor:
-                                                      whitedata[index].color,
-                                                  wineRegion: whitedata[index]
-                                                      .wineRegion,
-                                                  addnote: whitedata[index].addnote,
-                                                  wineType:
-                                                      whitedata[index].wineType,
-                                                  country:
-                                                      whitedata[index].country,
-                                                  village:
-                                                      whitedata[index].village,
-                                                  aging: whitedata[index]
-                                                      .agingInYears,
-                                                  note: whitedata[index].notes,
-                                                  grapeVar: whitedata[index]
-                                                      .grapeVarieties,
+                                                Get.to(Suggestedbottle(
+                                                  // fav: false,
+                                                  // webAdress: whitedata[index]
+                                                  //     .webAddress,
+                                                  // wineColor:
+                                                  //     whitedata[index].color,
+                                                  // wineRegion: whitedata[index]
+                                                  //     .wineRegion,
+                                                  // addnote: whitedata[index].addnote,
+                                                  // wineType:
+                                                  //     whitedata[index].wineType,
+                                                  // country:
+                                                  //     whitedata[index].country,
+                                                  // village:
+                                                  //     whitedata[index].village,
+                                                  // aging: whitedata[index]
+                                                  //     .agingInYears,
+                                                  // note: whitedata[index].notes,
+                                                  // grapeVar: whitedata[index]
+                                                  //     .grapeVarieties,
+                                                  // producer:
+                                                  //     whitedata[index].producer,
+                                                  type: widget.type,
+                                                  title: widget.title,
                                                   producer:
-                                                      whitedata[index].producer,
-                                                  suggestedBottle:
                                                       whitedata[index]
                                                           .suggestedBottle,
                                                 ));
@@ -1088,24 +1102,24 @@ class _MyHomePageState extends State<MyHomePage> {
                                                                       .start,
                                                               children: <
                                                                   Widget>[
-                                                                Text(
-                                                                  widget.type ==
-                                                                          "LE AZIENDE"
-                                                                      ? whitedata[
-                                                                              index]
-                                                                          .producer
-                                                                      : widget.type ==
-                                                                              "I VINI"
-                                                                          ? whitedata[index]
-                                                                              .color
-                                                                          : whitedata[index]
-                                                                              .country,
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        16,
-                                                                  ),
-                                                                ),
+                                                                // Text(
+                                                                //   widget.type ==
+                                                                //           "LE AZIENDE"
+                                                                //       ? whitedata[
+                                                                //               index]
+                                                                //           .producer
+                                                                //       : widget.type ==
+                                                                //               "I VINI"
+                                                                //           ? whitedata[index]
+                                                                //               .color
+                                                                //           : whitedata[index]
+                                                                //               .country,
+                                                                //   style:
+                                                                //       TextStyle(
+                                                                //     fontSize:
+                                                                //         16,
+                                                                //   ),
+                                                                // ),
                                                                 widget.type ==
                                                                         "I VINI"
                                                                     ? Text(
@@ -1127,12 +1141,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                                                           ? whitedata[index]
                                                                               .country
                                                                           : whitedata[index]
-                                                                              .producer,
+                                                                              .suggestedBottle,
                                                                   style: TextStyle(
                                                                       fontSize:
                                                                           14,
                                                                       color: Colors
-                                                                          .grey),
+                                                                          .black),
                                                                 ),
                                                               ],
                                                             ),
@@ -1285,7 +1299,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                                       widget.type ==
                                                                               "LE AZIENDE"
                                                                           ? _searchResult[index]
-                                                                              .wineRegion
+                                                                              .suggestedBottle
                                                                           : widget.type == "I VINI"
                                                                               ? _searchResult[index].country
                                                                               : _searchResult[index].producer,
@@ -1388,36 +1402,18 @@ class _MyHomePageState extends State<MyHomePage> {
                                                                           .start,
                                                                   children: <
                                                                       Widget>[
-                                                                    Text(
-                                                                      widget.type ==
-                                                                              "LE AZIENDE"
-                                                                          ? reddata[index]
-                                                                              .producer
-                                                                          : widget.type == "I VINI"
-                                                                              ? reddata[index].color
-                                                                              : reddata[index].country,
-                                                                      style:
+                                                                    Text(reddata[index]
+                                                                              .producer,
+                                                                         style:
                                                                           TextStyle(
                                                                         fontSize:
                                                                             16,
                                                                       ),
                                                                     ),
-                                                                    widget.type ==
-                                                                            "I VINI"
-                                                                        ? Text(
-                                                                            "Wine Producer: ${reddata[index].producer}",
-                                                                            style:
-                                                                                TextStyle(fontSize: 14, color: Colors.grey))
-                                                                        : SizedBox(),
                                                                     Text(
-                                                                      widget.type ==
-                                                                              "LE AZIENDE"
-                                                                          ? reddata[index]
-                                                                              .wineRegion
-                                                                          : widget.type == "I VINI"
-                                                                              ? reddata[index].country
-                                                                              : reddata[index].producer,
-                                                                      style: TextStyle(
+                                                                     reddata[index]
+                                                                              .suggestedBottle,
+                                                                         style: TextStyle(
                                                                           fontSize:
                                                                               14,
                                                                           color:
@@ -1559,35 +1555,17 @@ class _MyHomePageState extends State<MyHomePage> {
                                                                   children: <
                                                                       Widget>[
                                                                     Text(
-                                                                      widget.type ==
-                                                                              "LE AZIENDE"
-                                                                          ? _searchResultwhite[index]
-                                                                              .producer
-                                                                          : widget.type == "I VINI"
-                                                                              ? _searchResultwhite[index].color
-                                                                              : _searchResultwhite[index].country,
-                                                                      style:
+                                                                     _searchResultwhite[index]
+                                                                              .producer,
+                                                                         style:
                                                                           TextStyle(
                                                                         fontSize:
                                                                             16,
                                                                       ),
                                                                     ),
-                                                                    widget.type ==
-                                                                            "I VINI"
-                                                                        ? Text(
-                                                                            "Wine Producer: ${_searchResultwhite[index].producer}",
-                                                                            style:
-                                                                                TextStyle(fontSize: 14, color: Colors.grey))
-                                                                        : SizedBox(),
                                                                     Text(
-                                                                      widget.type ==
-                                                                              "LE AZIENDE"
-                                                                          ? _searchResultwhite[index]
-                                                                              .wineRegion
-                                                                          : widget.type == "I VINI"
-                                                                              ? _searchResultwhite[index].country
-                                                                              : _searchResultwhite[index].producer,
-                                                                      style: TextStyle(
+                                                                              _searchResultwhite[index].suggestedBottle,
+                                                                               style: TextStyle(
                                                                           fontSize:
                                                                               14,
                                                                           color:
@@ -1690,34 +1668,16 @@ class _MyHomePageState extends State<MyHomePage> {
                                                                   children: <
                                                                       Widget>[
                                                                     Text(
-                                                                      widget.type ==
-                                                                              "LE AZIENDE"
-                                                                          ? whitedata[index]
-                                                                              .producer
-                                                                          : widget.type == "I VINI"
-                                                                              ? whitedata[index].color
-                                                                              : whitedata[index].country,
-                                                                      style:
+                                                                      whitedata[index]
+                                                                              .producer,
+                                                                        style:
                                                                           TextStyle(
                                                                         fontSize:
                                                                             16,
                                                                       ),
                                                                     ),
-                                                                    widget.type ==
-                                                                            "I VINI"
-                                                                        ? Text(
-                                                                            "Wine Producer: ${whitedata[index].producer}",
-                                                                            style:
-                                                                                TextStyle(fontSize: 14, color: Colors.grey))
-                                                                        : SizedBox(),
                                                                     Text(
-                                                                      widget.type ==
-                                                                              "LE AZIENDE"
-                                                                          ? whitedata[index]
-                                                                              .wineRegion
-                                                                          : widget.type == "I VINI"
-                                                                              ? whitedata[index].country
-                                                                              : whitedata[index].producer,
+                                                                               whitedata[index].suggestedBottle,
                                                                       style: TextStyle(
                                                                           fontSize:
                                                                               14,

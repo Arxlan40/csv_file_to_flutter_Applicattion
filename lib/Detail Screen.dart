@@ -137,7 +137,7 @@ class _DetailScreenState extends State<DetailScreen> {
         elevation: 5,
         centerTitle: true,
         title: Text(
-          "PAOLO SCAVINO",
+          "${widget.producer}",
           style:
           TextStyle(fontSize: 18, fontFamily: "sans", color: Colors.white),
         ),
@@ -236,25 +236,26 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
               ],),
             ),
+            // Padding(
+            //   padding: const EdgeInsets.only(top:25.0,left:15),
+            //   child: Row(children: [
+            //     Text("SUGGESTED BOTTLE : ", style: TextStyle(
+            //       fontSize: 16,
+            //       fontWeight: FontWeight.bold,
+            //       color: Colors.black,
+            //     ),),
+            //     Flexible(
+            //       child: Text(
+            //         "${widget.suggestedBottle}",style: TextStyle(
+            //         fontSize: 16,
+            //         fontWeight: FontWeight.w400,
+            //         color: Colors.black,
+            //       ),
+            //       ),
+            //     ),
+            //   ],),
+            // ),
             Padding(
-              padding: const EdgeInsets.only(top:25.0,left:15),
-              child: Row(children: [
-                Text("SUGGESTED BOTTLE : ", style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),),
-                Flexible(
-                  child: Text(
-                    "${widget.suggestedBottle}",style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.black,
-                  ),
-                  ),
-                ),
-              ],),
-            ),  Padding(
               padding: const EdgeInsets.only(top:25.0,left:15),
               child: Row(children: [
                 Text("POTENTIAL AGING : ", style: TextStyle(

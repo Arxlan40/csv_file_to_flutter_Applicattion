@@ -565,6 +565,8 @@
             "Wine Type": "Cabernet ",
             "Grape Varieties": "Cabernet ",
             "Wine Region": "Paarl",
+            "Village": "Somerset ",
+
             "Country": "ZA",
             "Producer": "David Frost",
             "Suggested Bottle": "par Excellence, Grand Sam Pinotage",
@@ -1015,6 +1017,7 @@
             "Color": "Red",
             "Country": "Cile",
             "Producer": "",
+            "Village": "La Cadiere d’Azur",
 
             "Aging in Years": "4 - 15 +",
             "Wine Type": "Bandol",
@@ -1030,6 +1033,8 @@
             "Village": "Cunaco",
             "Wine Region": "Valle Colchagua",
             "Country": "Cile",
+            "Suggested Bottle": "Clos Apalta",
+
             "Producer": "Casa Lapostole",
             "web address": "www.lapostollewines.com",
             "Additional Notes": "Clos Apalta (Carmenere-Cabernet Sauvignon-Merlot) there are others very good and cheeper "
@@ -1053,6 +1058,8 @@
         {
             "Serial": "80",
             "Color": "Red",
+            "Village": "Puente Alto",
+
             "Aging in Years": "3 - 15  +",
             "Wine Type": "Carmenere",
             "Grape Varieties": "Vitis Biturica",
@@ -1067,6 +1074,8 @@
         {
             "Serial": "81",
             "Color": "Red",
+            "Village": "Puente Alto",
+
             "Aging in Years": "3 - 15  +",
             "Wine Type": "Carmenere",
             "Grape Varieties": "Vitis Biturica",
@@ -1325,6 +1334,7 @@
             "Serial": "100",
             "Color": "Red",
             "Grape Varieties": "Cabernet Sauvignon",
+            "Suggested Bottle": "Maria Remeriz de Ganuza Reserva Especial",
 
             "Aging in Years": "7 - 25 +",
             "Wine Type": "Tempranillo 95%, Cabernet Sauvignon",
@@ -1718,6 +1728,8 @@
             "Village": "Vosne-Romanee",
             "Wine Region": "Cote de Nuits",
             "Country": "France",
+            "Suggested Bottle": "Clos de La Bousse d’Or",
+
             "Producer": "Domain de la Romane’e-Conti",
             "Notes": "Chassagne - Montrachet",
             "web address": "www.romanee-conti.fr"
@@ -1731,6 +1743,8 @@
             "Village": "Flagey-Echezeaux",
             "Wine Region": "Cote de Nuits",
             "Country": "France",
+            "Suggested Bottle": "Clos de La Bousse d’Or",
+
             "Producer": "Domaine Henri Jayer",
             "Notes": "Domain Emmanuel Rouget",
             "web address": "www.dnswines.com"
@@ -1797,6 +1811,8 @@
             "Wine Region": "Cote de Nuits",
             "Country": "France",
             "Producer": "Domain Leroy",
+            "Suggested Bottle": "Clos-de-La-Mousse",
+
             "web address": "www.domaine-leroy.com"
         },
         {
@@ -1809,6 +1825,8 @@
             "Wine Region": "Cote de Beaume",
             "Country": "France",
             "Producer": "Domain Leflaive",
+            "Suggested Bottle": "Clos-de-La-Mousse",
+
             "web address": "www.leflaive.fr"
         },
         {
@@ -1817,6 +1835,8 @@
             "Aging in Years": "+",
             "Wine Type": "Bourgogne ",
             "Grape Varieties": "Pinot Noire",
+            "Suggested Bottle": "Clos-de-La-Mousse",
+
             "Village": "Meursault",
             "Wine Region": "Cote de Nuits",
             "Country": "France",
@@ -1839,6 +1859,8 @@
         {
             "Serial": "137",
             "Color": "White",
+            "Village": "Aloxe-Corton",
+
             "Aging in Years": "+",
             "Wine Type": "Bourgogne ",
             "Grape Varieties": "Chardonnay",
@@ -1850,6 +1872,8 @@
         {
             "Serial": "138",
             "Color": "White",
+            "Village": "Aloxe-Corton",
+
             "Aging in Years": "+",
             "Wine Type": "Bourgogne ",
             "Grape Varieties": "Chardonnay",
@@ -1874,6 +1898,8 @@
         {
             "Serial": "140",
             "Color": "White",
+            "Village": "Meursault",
+
             "Aging in Years": "+",
             "Wine Type": "Bourgogne ",
             "Grape Varieties": "Chardonnay",
@@ -1885,6 +1911,8 @@
         {
             "Serial": "141",
             "Color": "White",
+            "Village": "Meursault",
+
             "Aging in Years": "+",
             "Wine Type": "Bourgogne ",
             "Grape Varieties": "Chardonnay",
@@ -1897,6 +1925,9 @@
             "Serial": "142",
             "Color": "White",
             "Aging in Years": "+",
+            "Village": "Meursault",
+
+
             "Wine Type": "Bourgogne ",
             "Grape Varieties": "Chardonnay",
             "Country": "France",
@@ -1907,6 +1938,8 @@
         {
             "Serial": "143",
             "Color": "White",
+            "Village": "Meursault",
+
             "Aging in Years": "+",
             "Wine Type": "Bourgogne ",
             "Grape Varieties": "Chardonnay",
@@ -1919,6 +1952,8 @@
             "Serial": "144",
             "Color": "White",
             "Aging in Years": "+",
+            "Village": "Meursault",
+
             "Wine Type": "Bourgogne ",
             "Grape Varieties": "Chardonnay",
             "Country": "France",
@@ -1930,6 +1965,7 @@
             "Serial": "145",
             "Color": "White",
             "Aging in Years": "+",
+
             "Wine Type": "Bourgogne ",
             "Grape Varieties": "Chardonnay",
             "Village": "Puligny-Montrachet",
@@ -1942,6 +1978,8 @@
         {
             "Serial": "146",
             "Color": "White",
+            "Village": "Puligny-Montrachet",
+
             "Aging in Years": "+",
             "Wine Type": "Bourgogne ",
             "Grape Varieties": "Chardonnay",
@@ -1953,6 +1991,8 @@
         {
             "Serial": "147",
             "Color": "White",
+            "Village": "Puligny-Montrachet",
+
             "Aging in Years": "+",
             "Wine Type": "Bourgogne ",
             "Grape Varieties": "Chardonnay",
@@ -1968,6 +2008,8 @@
             "Wine Type": "Bourgogne ",
             "Grape Varieties": "Chardonnay",
             "Country": "France",
+            "Village": "Puligny-Montrachet",
+
             "Producer": "Domain Leflaive",
             "Suggested Bottle": "Chevalier Montrachet",
             "web address": "www.leflaive.fr"
@@ -1977,6 +2019,8 @@
             "Grape Varieties": "Syrah",
             "Color": "White",
             "Wine Type": "Bourgogne ",
+            "Village": "Puligny-Montrachet",
+
 
             "Country": "France",
             "Producer": "Domain Coche-Dury",
@@ -1987,6 +2031,7 @@
             "Serial": "150",
             "Color": "Red",
             "Aging in Years": "+",
+            
             "Wine Type": "Bourgogne ",
             "Grape Varieties": "Pinot Noire",
             "Village": "Chambolle-Musigny",

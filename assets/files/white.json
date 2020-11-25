@@ -10,6 +10,8 @@
             "Country": "France",
             "Producer": "Domain des Comte Lafon",
             "web address": "www.comtes-lafon.fr",
+            "Suggested Bottle": "Corton-Charlemagne",
+
             "Serial": "1"
         },
         {
@@ -57,6 +59,8 @@
             "Wine Type": "Bourgogne Blanc ",
             "Grape Varieties": "Chardonnay",
             "Village": "Chablis",
+            "Suggested Bottle": "Chevalier Montrachet Grand Cru",
+
             "Wine Region": "Chablis",
             "Country": "France",
             "Producer": "Domain Raveneau",
@@ -69,6 +73,8 @@
             "Wine Type": "Bourgogne Blanc ",
             "Grape Varieties": "Chardonnay",
             "Village": "Beaume",
+            "Suggested Bottle": "Chevalier Montrachet Grand Cru",
+
             "Wine Region": "Chablis",
             "Country": "France",
             "Producer": "Joseph Drouhin",
@@ -80,6 +86,8 @@
             "Aging in Years": "3 - 8",
             "Wine Type": "Bourgogne Blanc ",
             "Grape Varieties": "Chardonnay",
+            "Suggested Bottle": "Chevalier Montrachet Grand Cru",
+
             "Village": "Beaume",
             "Wine Region": "Chablis",
             "Country": "France",
@@ -93,6 +101,7 @@
             "Wine Type": "Bourgogne Blanc ",
             "Grape Varieties": "Chardonnay",
             "Village": "Beaume",
+
             "Wine Region": "Cote de Beaume",
             "Country": "France",
             "Producer": "Bouchard Pere et Fils",
@@ -1228,6 +1237,8 @@
             "Wine Type": "Chardonney Chilean",
             "Grape Varieties": "Chardonnay",
             "Country": "Cile",
+            "Village": "Cunaco",
+
             "Producer": "Jaques & Francois Lurton",
             "Suggested Bottle": "Blanc Gran Araucano",
             "Notes": "After 2006 is Francoise Lurton alone at Hacienda Araucano",
