@@ -7,6 +7,7 @@ import 'package:spreadsheet/test.dart';
 
 import 'Contact.dart';
 import 'Country.dart';
+import 'ProducerList.dart';
 import 'localstorage.dart';
 
 
@@ -34,7 +35,9 @@ class HomeWine extends StatelessWidget {
         children: [
           InkWell(
             onTap: (){
-              Get.to(Countries(type: "redgrap",title: "RED WINE BY GRAPE",));
+              Get.to(MyHomePage(type: "redgrap", title: "RED WINE BY GRAPE"));
+
+           //   Get.to(Countries(type: "redgrap",title: "RED WINE BY GRAPE",));
 
             },
             child: Padding(
@@ -104,7 +107,8 @@ class HomeWine extends StatelessWidget {
           ),
           InkWell(
             onTap: (){
-              Get.to(Countries(type: "whitegrap",title: "WHITE WINE BY GRAPE"));
+              Get.to(MyHomePage(type: "whitegrap", title: "WHITE WINE BY GRAPE"));
+
             },
             child: Padding(
               padding: const EdgeInsets.only(top:20.0),
@@ -312,7 +316,7 @@ class HomeWine extends StatelessWidget {
           InkWell(
 
             onTap: (){
-              Get.to(MyHomePage(type: "LE AZIENDE",));
+              Get.to(ProducerList());
             },
             child: Padding(
               padding: const EdgeInsets.only(top:20.0),

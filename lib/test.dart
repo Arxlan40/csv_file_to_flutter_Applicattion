@@ -30,16 +30,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   bool loading = false;
   void _filter(List<Red> item) {
-    final ids = reddata.map((e) => e.suggestedBottle).toSet();
-    final idsw = whitedata.map((e) => e.suggestedBottle).toSet();
+    final ids = reddata.map((e) => e.wineType).toSet();
+    final idsw = whitedata.map((e) => e.wineType).toSet();
 
     setState(() {
-     widget.type == "redgrap" || widget.type =="redcount" ?
+      widget.type =="redcount" ?
       reddata =
-          item.where((value) => value.country == widget.country).toList()  : widget.type == "whitegrap" || widget.type =="whitecount" ? whitedata =
+          item.where((value) => value.country == widget.country).toList()  :  widget.type =="whitecount" ? whitedata =
          item.where((value) => value.country == widget.country).toList() : SizedBox();
-     widget.type == "redcount" ?
-     reddata.retainWhere((x) => ids.remove(x.suggestedBottle)): widget.type == "whitecount" ? whitedata.retainWhere((x) => idsw.remove(x.suggestedBottle)) :SizedBox();
+      widget.type == "redgrap" || widget.type == "redcount" ?
+     reddata.retainWhere((x) => ids.remove(x.wineType)): widget.type == "whitegrap" || widget.type == "whitecount" ? whitedata.retainWhere((x) => idsw.remove(x.wineType)) :SizedBox();
 
     });
   }
@@ -61,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
           })
         : reddata.forEach((userDetail) {
             if (userDetail.country.toLowerCase().contains(text.toLowerCase()) ||
-                userDetail.suggestedBottle.toLowerCase().contains(text.toLowerCase()))
+                userDetail.wineType.toLowerCase().contains(text.toLowerCase()))
               _searchResult.add(userDetail);
           });
     setState(() {});
@@ -83,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
           })
         : whitedata.forEach((userDetail) {
             if (userDetail.country.toLowerCase().contains(text.toLowerCase()) ||
-                userDetail.suggestedBottle.toLowerCase().contains(text.toLowerCase()))
+                userDetail.wineType.toLowerCase().contains(text.toLowerCase()))
               _searchResultwhite.add(userDetail);
           });
     setState(() {});
@@ -198,7 +198,7 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
 
         title: Text(
-                "${widget.title}",
+                "Wine Type",
                 style: TextStyle(
                 fontSize: 18, fontFamily: "sans", color: Colors.white),
               ),
@@ -210,15 +210,15 @@ class _MyHomePageState extends State<MyHomePage> {
               ? Scaffold(
                   body: ListView(
                     children: [
-                      TextField(
-                        controller: textcontroller,
-                        onChanged: onSearchTextChanged,
-                        decoration: new InputDecoration(
-                            prefixIcon:
-                                new Icon(Icons.search, color: Colors.grey),
-                            hintText: "Search...",
-                            hintStyle: new TextStyle(color: Colors.grey)),
-                      ),
+                      // TextField(
+                      //   controller: textcontroller,
+                      //   onChanged: onSearchTextChanged,
+                      //   decoration: new InputDecoration(
+                      //       prefixIcon:
+                      //           new Icon(Icons.search, color: Colors.grey),
+                      //       hintText: "Search...",
+                      //       hintStyle: new TextStyle(color: Colors.grey)),
+                      // ),
                       _searchResult.length != 0 ||
                               textcontroller.text
                                   .trim()
@@ -233,26 +233,35 @@ class _MyHomePageState extends State<MyHomePage> {
                               itemBuilder: (BuildContext context, index) {
                                 return InkWell(
                                   onTap: () {
-                                    Get.to(DetailScreen(
-                                      fav: false,
-                                      addnote: _searchResult[index].addnote,
-                                      webAdress:
-                                          _searchResult[index].webAddress,
-                                      wineColor: _searchResult[index].color,
-                                      wineRegion:
-                                          _searchResult[index].wineRegion,
-                                      wineType: _searchResult[index].wineType,
-                                      country: _searchResult[index].country,
-                                      village: _searchResult[index].village,
-                                      aging: _searchResult[index].agingInYears,
-                                      note: _searchResult[index].notes,
-                                      grapeVar:
-                                          _searchResult[index].grapeVarieties,
-                                      producer: _searchResult[index].producer,
-                                      suggestedBottle:
-                                          _searchResult[index].suggestedBottle,
-                                    ));
-                                  },
+                                    Get.to(Suggestedbottle(
+                                      // fav: false,
+                                      // addnote:_searchResult[index]
+                                      //     .addnote ,
+                                      // webAdress: _searchResult[index]
+                                      //     .webAddress,
+                                      // wineColor:
+                                      //     _searchResult[index].color,
+                                      // wineRegion: _searchResult[index]
+                                      //     .wineRegion,
+                                      // wineType:
+                                      //     _searchResult[index].wineType,
+                                      // country:
+                                      //     _searchResult[index].country,
+                                      // village:
+                                      //     _searchResult[index].village,
+                                      // aging: _searchResult[index]
+                                      //     .agingInYears,
+                                      // note: _searchResult[index].notes,
+                                      // grapeVar: _searchResult[index]
+                                      //     .grapeVarieties,
+                                      // producer:
+                                      //     _searchResult[index].producer,
+                                      producer:
+                                      _searchResult[index]
+                                          .wineType,
+                                      type: widget.type,
+                                      title: widget.title,
+                                    ));                                  },
                                   child: Column(
                                     children: [
                                       Row(
@@ -274,18 +283,18 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   children: <Widget>[
                                                     Text(
                                                       _searchResult[index]
-                                                          .grapeVarieties,
+                                                          .wineType,
                                                       style: TextStyle(
                                                         fontSize: 16,
                                                       ),
                                                     ),
-                                                    Text(
-                                                      _searchResult[index]
-                                                          .village,
-                                                      style: TextStyle(
-                                                          fontSize: 14,
-                                                          color: Colors.grey),
-                                                    ),
+                                                    // Text(
+                                                    //   _searchResult[index]
+                                                    //       .village,
+                                                    //   style: TextStyle(
+                                                    //       fontSize: 14,
+                                                    //       color: Colors.grey),
+                                                    // ),
                                                   ],
                                                 ),
                                               ),
@@ -315,23 +324,35 @@ class _MyHomePageState extends State<MyHomePage> {
                               itemBuilder: (BuildContext context, index) {
                                 return InkWell(
                                   onTap: () {
-                                    Get.to(DetailScreen(
-                                      fav: false,
-                                      addnote:reddata[index].addnote ,
-                                      webAdress: reddata[index].webAddress,
-                                      wineColor: reddata[index].color,
-                                      wineRegion: reddata[index].wineRegion,
-                                      wineType: reddata[index].wineType,
-                                      country: reddata[index].country,
-                                      village: reddata[index].village,
-                                      aging: reddata[index].agingInYears,
-                                      note: reddata[index].notes,
-                                      grapeVar: reddata[index].grapeVarieties,
-                                      producer: reddata[index].producer,
-                                      suggestedBottle:
-                                          reddata[index].suggestedBottle,
-                                    ));
-                                  },
+                                    Get.to(Suggestedbottle(
+                                      // fav: false,
+                                      // addnote:_searchResult[index]
+                                      //     .addnote ,
+                                      // webAdress: _searchResult[index]
+                                      //     .webAddress,
+                                      // wineColor:
+                                      //     _searchResult[index].color,
+                                      // wineRegion: _searchResult[index]
+                                      //     .wineRegion,
+                                      // wineType:
+                                      //     _searchResult[index].wineType,
+                                      // country:
+                                      //     _searchResult[index].country,
+                                      // village:
+                                      //     _searchResult[index].village,
+                                      // aging: _searchResult[index]
+                                      //     .agingInYears,
+                                      // note: _searchResult[index].notes,
+                                      // grapeVar: _searchResult[index]
+                                      //     .grapeVarieties,
+                                      // producer:
+                                      //     _searchResult[index].producer,
+                                      producer:
+                                      reddata[index]
+                                          .wineType,
+                                      type: widget.type,
+                                      title: widget.title,
+                                    ));                                  },
                                   child: Column(
                                     children: [
                                       Row(
@@ -353,17 +374,17 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   children: <Widget>[
                                                     Text(
                                                       reddata[index]
-                                                          .grapeVarieties,
+                                                          .wineType,
                                                       style: TextStyle(
                                                         fontSize: 16,
                                                       ),
                                                     ),
-                                                    Text(
-                                                      reddata[index].village,
-                                                      style: TextStyle(
-                                                          fontSize: 14,
-                                                          color: Colors.grey),
-                                                    ),
+                                                    // Text(
+                                                    //   reddata[index].village,
+                                                    //   style: TextStyle(
+                                                    //       fontSize: 14,
+                                                    //       color: Colors.grey),
+                                                    // ),
                                                   ],
                                                 ),
                                               ),
@@ -391,15 +412,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   ? Scaffold(
                       body: ListView(
                         children: [
-                          TextField(
-                            controller: textcontrollerwhite,
-                            onChanged: onSearchTextChangedwhite,
-                            decoration: new InputDecoration(
-                                prefixIcon:
-                                    new Icon(Icons.search, color: Colors.grey),
-                                hintText: "Search...",
-                                hintStyle: new TextStyle(color: Colors.grey)),
-                          ),
+                          // TextField(
+                          //   controller: textcontrollerwhite,
+                          //   onChanged: onSearchTextChangedwhite,
+                          //   decoration: new InputDecoration(
+                          //       prefixIcon:
+                          //           new Icon(Icons.search, color: Colors.grey),
+                          //       hintText: "Search...",
+                          //       hintStyle: new TextStyle(color: Colors.grey)),
+                          // ),
                           _searchResultwhite.length != 0 ||
                                   textcontrollerwhite.text
                                       .trim()
@@ -414,34 +435,35 @@ class _MyHomePageState extends State<MyHomePage> {
                                   itemBuilder: (BuildContext context, index) {
                                     return InkWell(
                                       onTap: () {
-                                        Get.to(DetailScreen(
-                                          fav: false,
-                                          addnote: _searchResultwhite[index]
-                                              .addnote,
-                                          webAdress: _searchResultwhite[index]
-                                              .webAddress,
-                                          wineColor:
-                                              _searchResultwhite[index].color,
-                                          wineRegion: _searchResultwhite[index]
-                                              .wineRegion,
-                                          wineType: _searchResultwhite[index]
+                                        Get.to(Suggestedbottle(
+                                          // fav: false,
+                                          // addnote:_searchResult[index]
+                                          //     .addnote ,
+                                          // webAdress: _searchResult[index]
+                                          //     .webAddress,
+                                          // wineColor:
+                                          //     _searchResult[index].color,
+                                          // wineRegion: _searchResult[index]
+                                          //     .wineRegion,
+                                          // wineType:
+                                          //     _searchResult[index].wineType,
+                                          // country:
+                                          //     _searchResult[index].country,
+                                          // village:
+                                          //     _searchResult[index].village,
+                                          // aging: _searchResult[index]
+                                          //     .agingInYears,
+                                          // note: _searchResult[index].notes,
+                                          // grapeVar: _searchResult[index]
+                                          //     .grapeVarieties,
+                                          // producer:
+                                          //     _searchResult[index].producer,
+                                          producer:
+                                          _searchResult[index]
                                               .wineType,
-                                          country:
-                                              _searchResultwhite[index].country,
-                                          village:
-                                              _searchResultwhite[index].village,
-                                          aging: _searchResultwhite[index]
-                                              .agingInYears,
-                                          note: _searchResultwhite[index].notes,
-                                          grapeVar: _searchResultwhite[index]
-                                              .grapeVarieties,
-                                          producer: _searchResultwhite[index]
-                                              .producer,
-                                          suggestedBottle:
-                                              _searchResultwhite[index]
-                                                  .suggestedBottle,
-                                        ));
-                                      },
+                                          type: widget.type,
+                                          title: widget.title,
+                                        ));                                      },
                                       child: Column(
                                         children: [
                                           Row(
@@ -467,20 +489,20 @@ class _MyHomePageState extends State<MyHomePage> {
                                                         Text(
                                                           _searchResultwhite[
                                                                   index]
-                                                              .grapeVarieties,
+                                                              .wineType,
                                                           style: TextStyle(
                                                             fontSize: 16,
                                                           ),
                                                         ),
-                                                        Text(
-                                                          _searchResultwhite[
-                                                                  index]
-                                                              .village,
-                                                          style: TextStyle(
-                                                              fontSize: 14,
-                                                              color:
-                                                                  Colors.grey),
-                                                        ),
+                                                        // Text(
+                                                        //   _searchResultwhite[
+                                                        //           index]
+                                                        //       .village,
+                                                        //   style: TextStyle(
+                                                        //       fontSize: 14,
+                                                        //       color:
+                                                        //           Colors.grey),
+                                                        // ),
                                                       ],
                                                     ),
                                                   ),
@@ -510,26 +532,35 @@ class _MyHomePageState extends State<MyHomePage> {
                                   itemBuilder: (BuildContext context, index) {
                                     return InkWell(
                                       onTap: () {
-                                        Get.to(DetailScreen(
-                                          fav: false,
-                                          addnote:whitedata[index].addnote ,
-                                          webAdress:
-                                              whitedata[index].webAddress,
-                                          wineColor: whitedata[index].color,
-                                          wineRegion:
-                                              whitedata[index].wineRegion,
-                                          wineType: whitedata[index].wineType,
-                                          country: whitedata[index].country,
-                                          village: whitedata[index].village,
-                                          aging: whitedata[index].agingInYears,
-                                          note: whitedata[index].notes,
-                                          grapeVar:
-                                              whitedata[index].grapeVarieties,
-                                          producer: whitedata[index].producer,
-                                          suggestedBottle:
-                                              whitedata[index].suggestedBottle,
-                                        ));
-                                      },
+                                        Get.to(Suggestedbottle(
+                                          // fav: false,
+                                          // addnote:_searchResult[index]
+                                          //     .addnote ,
+                                          // webAdress: _searchResult[index]
+                                          //     .webAddress,
+                                          // wineColor:
+                                          //     _searchResult[index].color,
+                                          // wineRegion: _searchResult[index]
+                                          //     .wineRegion,
+                                          // wineType:
+                                          //     _searchResult[index].wineType,
+                                          // country:
+                                          //     _searchResult[index].country,
+                                          // village:
+                                          //     _searchResult[index].village,
+                                          // aging: _searchResult[index]
+                                          //     .agingInYears,
+                                          // note: _searchResult[index].notes,
+                                          // grapeVar: _searchResult[index]
+                                          //     .grapeVarieties,
+                                          // producer:
+                                          //     _searchResult[index].producer,
+                                          producer:
+                                          whitedata[index]
+                                              .wineType,
+                                          type: widget.type,
+                                          title: widget.title,
+                                        ));                                      },
                                       child: Column(
                                         children: [
                                           Row(
@@ -554,19 +585,19 @@ class _MyHomePageState extends State<MyHomePage> {
                                                       children: <Widget>[
                                                         Text(
                                                           whitedata[index]
-                                                              .grapeVarieties,
+                                                              .wineType,
                                                           style: TextStyle(
                                                             fontSize: 16,
                                                           ),
                                                         ),
-                                                        Text(
-                                                          whitedata[index]
-                                                              .village,
-                                                          style: TextStyle(
-                                                              fontSize: 14,
-                                                              color:
-                                                                  Colors.grey),
-                                                        ),
+                                                        // Text(
+                                                        //   whitedata[index]
+                                                        //       .village,
+                                                        //   style: TextStyle(
+                                                        //       fontSize: 14,
+                                                        //       color:
+                                                        //           Colors.grey),
+                                                        // ),
                                                       ],
                                                     ),
                                                   ),
@@ -594,16 +625,16 @@ class _MyHomePageState extends State<MyHomePage> {
                       ? Scaffold(
                           body: ListView(
                             children: [
-                              TextField(
-                                controller: textcontroller,
-                                onChanged: onSearchTextChanged,
-                                decoration: new InputDecoration(
-                                    prefixIcon: new Icon(Icons.search,
-                                        color: Colors.grey),
-                                    hintText: "Search...",
-                                    hintStyle:
-                                        new TextStyle(color: Colors.grey)),
-                              ),
+                              // TextField(
+                              //   controller: textcontroller,
+                              //   onChanged: onSearchTextChanged,
+                              //   decoration: new InputDecoration(
+                              //       prefixIcon: new Icon(Icons.search,
+                              //           color: Colors.grey),
+                              //       hintText: "Search...",
+                              //       hintStyle:
+                              //           new TextStyle(color: Colors.grey)),
+                              // ),
                               _searchResult.length != 0 ||
                                       textcontroller.text
                                           .trim()
@@ -644,7 +675,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                               //     _searchResult[index].producer,
                                               producer:
                                                   _searchResult[index]
-                                                      .suggestedBottle,
+                                                      .wineType,
                                               type: widget.type,
                                               title: widget.title,
                                             ));
@@ -714,7 +745,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                                           .country
                                                                       : _searchResult[
                                                                               index]
-                                                                          .suggestedBottle,
+                                                                          .wineType,
                                                               style: TextStyle(
                                                                   fontSize: 14,
                                                                   color: Colors
@@ -770,7 +801,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                               //     reddata[index].grapeVarieties,
                                               // producer: reddata[index].producer,
                                               producer: reddata[index]
-                                                  .suggestedBottle,
+                                                  .wineType,
                                               type: widget.type,
                                               title: widget.title,
                                             ));
@@ -838,7 +869,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                                           .country
                                                                       : reddata[
                                                                               index]
-                                                                          .suggestedBottle,
+                                                                          .wineType,
                                                               style: TextStyle(
                                                                   fontSize: 14,
                                                                   color: Colors
@@ -873,16 +904,16 @@ class _MyHomePageState extends State<MyHomePage> {
                           ? Scaffold(
                               body: ListView(
                                 children: [
-                                  TextField(
-                                    controller: textcontrollerwhite,
-                                    onChanged: onSearchTextChangedwhite,
-                                    decoration: new InputDecoration(
-                                        prefixIcon: new Icon(Icons.search,
-                                            color: Colors.grey),
-                                        hintText: "Search...",
-                                        hintStyle:
-                                            new TextStyle(color: Colors.grey)),
-                                  ),
+                                  // TextField(
+                                  //   controller: textcontrollerwhite,
+                                  //   onChanged: onSearchTextChangedwhite,
+                                  //   decoration: new InputDecoration(
+                                  //       prefixIcon: new Icon(Icons.search,
+                                  //           color: Colors.grey),
+                                  //       hintText: "Search...",
+                                  //       hintStyle:
+                                  //           new TextStyle(color: Colors.grey)),
+                                  // ),
                                   _searchResultwhite.length != 0 ||
                                           textcontrollerwhite.text
                                               .trim()
@@ -936,7 +967,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   title: widget.title,
                                                   producer:
                                                       _searchResultwhite[index]
-                                                          .suggestedBottle,
+                                                          .wineType,
                                                 ));
                                               },
                                               child: Column(
@@ -1005,7 +1036,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                                           ? _searchResultwhite[index]
                                                                               .country
                                                                           : _searchResultwhite[index]
-                                                                              .suggestedBottle,
+                                                                              .wineType,
                                                                   style: TextStyle(
                                                                       fontSize:
                                                                           14,
@@ -1072,7 +1103,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   title: widget.title,
                                                   producer:
                                                       whitedata[index]
-                                                          .suggestedBottle,
+                                                          .wineType,
                                                 ));
                                               },
                                               child: Column(
@@ -1141,7 +1172,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                                           ? whitedata[index]
                                                                               .country
                                                                           : whitedata[index]
-                                                                              .suggestedBottle,
+                                                                              .wineType,
                                                                   style: TextStyle(
                                                                       fontSize:
                                                                           14,
@@ -1182,16 +1213,16 @@ class _MyHomePageState extends State<MyHomePage> {
                                 Scaffold(
                                   body: ListView(
                                     children: [
-                                      TextField(
-                                        controller: textcontroller,
-                                        onChanged: onSearchTextChanged,
-                                        decoration: new InputDecoration(
-                                            prefixIcon: new Icon(Icons.search,
-                                                color: Colors.grey),
-                                            hintText: "Search...",
-                                            hintStyle: new TextStyle(
-                                                color: Colors.grey)),
-                                      ),
+                                      // TextField(
+                                      //   controller: textcontroller,
+                                      //   onChanged: onSearchTextChanged,
+                                      //   decoration: new InputDecoration(
+                                      //       prefixIcon: new Icon(Icons.search,
+                                      //           color: Colors.grey),
+                                      //       hintText: "Search...",
+                                      //       hintStyle: new TextStyle(
+                                      //           color: Colors.grey)),
+                                      // ),
                                       _searchResult.length != 0 ||
                                               textcontroller.text
                                                   .trim()

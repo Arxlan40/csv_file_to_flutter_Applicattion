@@ -32,8 +32,8 @@ class _SuggestedbottleState extends State<Suggestedbottle> {
     setState(() {
       widget.type == "redgrap" || widget.type =="redcount" ?
       reddata =
-          item.where((value) => value.suggestedBottle == widget.producer).toList(): whitedata =
-          item.where((value) => value.suggestedBottle == widget.producer).toList();
+          item.where((value) => value.wineType == widget.producer).toList(): whitedata =
+          item.where((value) => value.wineType == widget.producer).toList();
 
     });
   }
@@ -268,18 +268,18 @@ class _SuggestedbottleState extends State<Suggestedbottle> {
                                     children: <Widget>[
                                       Text(
                                         _searchResult[index]
-                                            .grapeVarieties,
+                                            .producer,
                                         style: TextStyle(
                                           fontSize: 16,
                                         ),
                                       ),
-                                      Text(
-                                        _searchResult[index]
-                                            .village,
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            color: Colors.grey),
-                                      ),
+                                      // Text(
+                                      //   _searchResult[index]
+                                      //       .village,
+                                      //   style: TextStyle(
+                                      //       fontSize: 14,
+                                      //       color: Colors.grey),
+                                      // ),
                                     ],
                                   ),
                                 ),
@@ -347,17 +347,17 @@ class _SuggestedbottleState extends State<Suggestedbottle> {
                                     children: <Widget>[
                                       Text(
                                         reddata[index]
-                                            .grapeVarieties,
+                                            .producer,
                                         style: TextStyle(
                                           fontSize: 16,
                                         ),
                                       ),
-                                      Text(
-                                        reddata[index].village,
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            color: Colors.grey),
-                                      ),
+                                      // Text(
+                                      //   reddata[index].village,
+                                      //   style: TextStyle(
+                                      //       fontSize: 14,
+                                      //       color: Colors.grey),
+                                      // ),
                                     ],
                                   ),
                                 ),
@@ -461,20 +461,20 @@ class _SuggestedbottleState extends State<Suggestedbottle> {
                                       Text(
                                         _searchResultwhite[
                                         index]
-                                            .grapeVarieties,
+                                            .producer,
                                         style: TextStyle(
                                           fontSize: 16,
                                         ),
                                       ),
-                                      Text(
-                                        _searchResultwhite[
-                                        index]
-                                            .village,
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            color:
-                                            Colors.grey),
-                                      ),
+                                      // Text(
+                                      //   _searchResultwhite[
+                                      //   index]
+                                      //       .village,
+                                      //   style: TextStyle(
+                                      //       fontSize: 14,
+                                      //       color:
+                                      //       Colors.grey),
+                                      // ),
                                     ],
                                   ),
                                 ),
@@ -548,19 +548,19 @@ class _SuggestedbottleState extends State<Suggestedbottle> {
                                     children: <Widget>[
                                       Text(
                                         whitedata[index]
-                                            .grapeVarieties,
+                                            .producer,
                                         style: TextStyle(
                                           fontSize: 16,
                                         ),
                                       ),
-                                      Text(
-                                        whitedata[index]
-                                            .village,
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            color:
-                                            Colors.grey),
-                                      ),
+                                      // Text(
+                                      //   whitedata[index]
+                                      //       .village,
+                                      //   style: TextStyle(
+                                      //       fontSize: 14,
+                                      //       color:
+                                      //       Colors.grey),
+                                      // ),
                                     ],
                                   ),
                                 ),

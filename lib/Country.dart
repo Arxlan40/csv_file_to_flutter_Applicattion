@@ -27,6 +27,88 @@ class Countries extends StatelessWidget {
           children: [
             InkWell(
               onTap: () {
+                print(title);
+                Get.to(MyHomePage(type: type, title: "$title",country: "Argentina",));
+              },
+              child: Container(
+                height: 60,
+                width: 230,
+                child: Card(
+                  color: Color(0xFF800000),
+                  child: Center(
+                    child: Text(
+                      "Argentina",
+                      style: TextStyle(
+                          fontSize: 28,
+                          fontFamily: "sans",
+                          color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            type == "redgrap" || type == "redcount"
+                ?  InkWell(
+              onTap: () {
+                Get.to(MyHomePage(type: type, title: "$title",country: "Australia",));
+              },
+              child: Container(
+                height: 60,
+                width: 230,
+                child: Card(
+                  color: Color(0xFF800000),
+                  child: Center(
+                    child: Text(
+                      "Australia",
+                      style: TextStyle(
+                          fontSize: 28, fontFamily: "sans", color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+            ):InkWell(
+              onTap: () {
+                Get.to(MyHomePage(type: type, title: "$title",country: "Austria",));
+              },
+              child: Container(
+                height: 60,
+                width: 230,
+                child: Card(
+                  color: Color(0xFF800000),
+                  child: Center(
+                    child: Text(
+                      "Austria",
+                      style: TextStyle(
+                          fontSize: 28, fontFamily: "sans", color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+          InkWell(
+              onTap: () {
+                Get.to(MyHomePage(type: type, title: "$title",country: "Cile",));
+              },
+                  child: Container(
+                      height: 60,
+                      width: 230,
+                      child: Card(
+                        color: Color(0xFF800000),
+                        child: Center(
+                          child: Text(
+                            "Cile",
+                            style: TextStyle(
+                                fontSize: 28,
+                                fontFamily: "sans",
+                                color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                ),
+            InkWell(
+              onTap: () {
                 Get.to(MyHomePage(type: type, title: "$title",country: "France",));
               },
               child: Container(
@@ -38,7 +120,28 @@ class Countries extends StatelessWidget {
                     child: Text(
                       "France",
                       style: TextStyle(
-                          fontSize: 30,
+                          fontSize: 28, fontFamily: "sans", color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            type == "redgrap" || type == "redcount"
+                ?  SizedBox(): InkWell(
+              onTap: () {
+                Get.to(MyHomePage(type: type, title: "$title",country: "Germany",));
+              },
+
+              child: Container(
+                height: 60,
+                width: 230,
+                child: Card(
+                  color: Color(0xFF800000),
+                  child: Center(
+                    child: Text(
+                      "Germany",
+                      style: TextStyle(
+                          fontSize: 28,
                           fontFamily: "sans",
                           color: Colors.white),
                     ),
@@ -50,6 +153,7 @@ class Countries extends StatelessWidget {
               onTap: () {
                 Get.to(MyHomePage(type: type, title: "$title",country: "Italy",));
               },
+
               child: Container(
                 height: 60,
                 width: 230,
@@ -59,16 +163,59 @@ class Countries extends StatelessWidget {
                     child: Text(
                       "Italy",
                       style: TextStyle(
-                          fontSize: 30, fontFamily: "sans", color: Colors.white),
+                          fontSize: 28, fontFamily: "sans", color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Get.to(MyHomePage(type: type, title: "$title",country: "New Zealand",));
+              },
+
+              child: Container(
+                height: 60,
+                width: 230,
+                child: Card(
+                  color: Color(0xFF800000),
+                  child: Center(
+                    child: Text(
+                      "New Zealand",
+                      style: TextStyle(
+                          fontSize: 28, fontFamily: "sans", color: Colors.white),
                     ),
                   ),
                 ),
               ),
             ),
             type == "redgrap" || type == "redcount"
+                ?  InkWell(
+              onTap: () {
+                Get.to(MyHomePage(type: type, title: "$title",country: "South Africa",));
+              },
+
+              child: Container(
+                      height: 60,
+                      width: 230,
+                      child: Card(
+                        color: Color(0xFF800000),
+                        child: Center(
+                          child: Text(
+                            "South Africa",
+                            style: TextStyle(
+                                fontSize: 28,
+                                fontFamily: "sans",
+                                color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                ): SizedBox(),
+            type == "redgrap" || type == "redcount"
                 ? InkWell(
               onTap: () {
-                Get.to(MyHomePage(type: type, title: "$title",country: "ZA",));
+                Get.to(MyHomePage(type: type, title: "$title",country: "Spain",));
               },
                   child: Container(
                       height: 60,
@@ -77,37 +224,17 @@ class Countries extends StatelessWidget {
                         color: Color(0xFF800000),
                         child: Center(
                           child: Text(
-                            "ZA",
+                            "Spain",
                             style: TextStyle(
-                                fontSize: 30,
+                                fontSize: 28,
                                 fontFamily: "sans",
                                 color: Colors.white),
                           ),
                         ),
                       ),
                     ),
-                )
-                : InkWell(
-              onTap: () {
-                Get.to(MyHomePage(type: type, title: "$title",country: "NZ",));
-              },
-                  child: Container(
-                      height: 60,
-                      width: 230,
-                      child: Card(
-                        color: Color(0xFF800000),
-                        child: Center(
-                          child: Text(
-                            "NZ",
-                            style: TextStyle(
-                                fontSize: 30,
-                                fontFamily: "sans",
-                                color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ),
-                ),
+                ): SizedBox(),
+
             InkWell(
               onTap: () {
                 Get.to(MyHomePage(type: type, title: "$title",country: "USA",));
@@ -121,120 +248,15 @@ class Countries extends StatelessWidget {
                     child: Text(
                       "USA",
                       style: TextStyle(
-                          fontSize: 30, fontFamily: "sans", color: Colors.white),
+                          fontSize: 28,
+                         // fontWeight: FontWeight.w400,
+                          fontFamily: "sans",
+                          color: Colors.white),
                     ),
                   ),
                 ),
               ),
             ),
-            InkWell(
-              onTap: () {
-                Get.to(MyHomePage(type: type, title: "$title",country: "Cile",));
-              },
-
-              child: Container(
-                height: 60,
-                width: 230,
-                child: Card(
-                  color: Color(0xFF800000),
-                  child: Center(
-                    child: Text(
-                      "Cile",
-                      style: TextStyle(
-                          fontSize: 30, fontFamily: "sans", color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                Get.to(MyHomePage(type: type, title: "$title",country: "Argentina",));
-              },
-
-              child: Container(
-                height: 60,
-                width: 230,
-                child: Card(
-                  color: Color(0xFF800000),
-                  child: Center(
-                    child: Text(
-                      "Argentina",
-                      style: TextStyle(
-                          fontSize: 30, fontFamily: "sans", color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            type == "redgrap" || type == "redcount"
-                ? InkWell(
-              onTap: () {
-                Get.to(MyHomePage(type: type, title: "$title",country: "Australia",));
-              },
-
-              child: Container(
-                      height: 60,
-                      width: 230,
-                      child: Card(
-                        color: Color(0xFF800000),
-                        child: Center(
-                          child: Text(
-                            "Australia",
-                            style: TextStyle(
-                                fontSize: 30,
-                                fontFamily: "sans",
-                                color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ),
-                )
-                : InkWell(
-              onTap: () {
-                Get.to(MyHomePage(type: type, title: "$title",country: "Austria",));
-              },
-
-              child: Container(
-                      height: 60,
-                      width: 230,
-                      child: Card(
-                        color: Color(0xFF800000),
-                        child: Center(
-                          child: Text(
-                            "Austria",
-                            style: TextStyle(
-                                fontSize: 30,
-                                fontFamily: "sans",
-                                color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ),
-                ),
-            type == "redgrap" || type == "redcount"
-                ? SizedBox()
-                : InkWell(
-              onTap: () {
-                Get.to(MyHomePage(type: type, title: "$title",country: "Germany",));
-              },
-                  child: Container(
-                      height: 60,
-                      width: 230,
-                      child: Card(
-                        color: Color(0xFF800000),
-                        child: Center(
-                          child: Text(
-                            "Germany",
-                            style: TextStyle(
-                                fontSize: 30,
-                                fontFamily: "sans",
-                                color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ),
-                ),
           ],
         ),
       ),

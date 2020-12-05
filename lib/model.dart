@@ -57,32 +57,32 @@ class Red {
 
   factory Red.fromJson(Map<String, dynamic> json) => Red(
     color: json["Color"],
-    agingInYears: json["Aging in Years"],
+    agingInYears: json["Potential Ageing Years"],
     wineType: json["Wine Type"],
-    grapeVarieties: json["Grape Varieties"],
+    grapeVarieties: json["Grape Variety"],
     village: json["Village"],
     wineRegion: json["Wine Region"],
     country: json["Country"],
     producer: json["Producer"],
     suggestedBottle: json["Suggested Bottle"],
     notes: json["Notes"],
-    webAddress: json["web address"],
+    webAddress: json["Web Address"],
       serial: json["Serial"],
     addnote:json['Additional Notes'],
   );
 
   Map<String, dynamic> toJson() => {
     "Color": color,
-    "Aging in Years": agingInYears,
+    "Potential Ageing Years": agingInYears,
     "Wine Type": wineType,
-    "Grape Varieties": grapeVarieties,
+    "Grape Variety": grapeVarieties,
     "Village": village,
     "Wine Region": wineRegion,
     "Country": country,
     "Producer": producer,
     "Suggested Bottle": suggestedBottle,
     "Notes": notes,
-    "web address": webAddress,
+    "Web Address": webAddress,
     "Serial": serial,
     "Additional Notes":addnote,
   };
