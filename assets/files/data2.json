@@ -98,7 +98,7 @@
             "Serial": "8"
         },
         {
-            "Producer": "Allegrinid",
+            "Producer": "Allegrini",
             "Wine Type": "Amarone",
             "Grape Variety": "Corvina",
             "Village": "Fumane di Valpolicella",
@@ -1714,7 +1714,7 @@
             "Village": "Lujan de Cuyo",
             "Wine Region": "Mendoza",
             "Country": "Argentina",
-            "Suggested Bottle": "Catena Alta ma anche gli altri",
+            "Suggested Bottle": "",
             "Potential Ageing Years": "5 - 10",
             "Web Address": "www.catenawines.com",
             "Serial": "141"
@@ -2411,6 +2411,7 @@
             "Village": "Valladolid",
             "Wine Region": "Ribera del Duero",
             "Country": "Spain",
+            "Grape Variety": "Tempranillo 95% Cabernet Sauvignon",
             "Suggested Bottle": "Unico",
             "Potential Ageing Years": "7 - 25 +",
             "Notes": "Unic",
@@ -2422,6 +2423,7 @@
             "Wine Type": "Tempranillo",
             "Village": "Samaniego",
             "Wine Region": "Pais Vasco",
+            "Grape Variety": "Tempranillo, Viura, Malvasia",
             "Country": "Spain",
             "Suggested Bottle": "Maria Remeriz de Ganuza Reserva Especial",
             "Potential Ageing Years": "7 - 25 +",

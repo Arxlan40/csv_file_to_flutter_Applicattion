@@ -1,16 +1,12 @@
-import 'dart:convert';
-import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:get/get.dart';
+import 'package:spreadsheet/Webview.dart';
 
-import 'localstorage.dart';
 
 const String kFileName = 'winefav.json';
 
 class ProducerDetail extends StatefulWidget {
+
   String wineColor;
   String wineType;
   String country;
@@ -23,30 +19,28 @@ class ProducerDetail extends StatefulWidget {
   String webAdress;
   String note;
   String addnote;
-
   bool fav;
 
   ProducerDetail(
       {this.producer,
-        this.country,
-        this.suggestedBottle,
-        this.wineRegion,
-        this.wineType,
-        this.village,
-        this.fav,
-        this.aging,
-        this.grapeVar,
-        this.note,
-        this.addnote,
-        this.webAdress,
-        this.wineColor});
+      this.country,
+      this.suggestedBottle,
+      this.wineRegion,
+      this.wineType,
+      this.village,
+      this.fav,
+      this.aging,
+      this.grapeVar,
+      this.note,
+      this.addnote,
+      this.webAdress,
+      this.wineColor});
 
   @override
   _ProducerDetailState createState() => _ProducerDetailState();
 }
 
 class _ProducerDetailState extends State<ProducerDetail> {
-
   @override
   void initState() {
     super.initState();
@@ -62,10 +56,9 @@ class _ProducerDetailState extends State<ProducerDetail> {
         title: Text(
           "${widget.producer}",
           style:
-          TextStyle(fontSize: 18, fontFamily: "sans", color: Colors.white),
+              TextStyle(fontSize: 18, fontFamily: "sans", color: Colors.white),
         ),
       ),
-
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -158,7 +151,6 @@ class _ProducerDetailState extends State<ProducerDetail> {
                     style: TextStyle(
                       fontSize: 16,
                       fontFamily: "sans",
-
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
@@ -169,7 +161,6 @@ class _ProducerDetailState extends State<ProducerDetail> {
                       style: TextStyle(
                         fontSize: 16,
                         fontFamily: "sans",
-
                         fontWeight: FontWeight.w400,
                         color: Colors.black,
                       ),
@@ -188,20 +179,23 @@ class _ProducerDetailState extends State<ProducerDetail> {
                     style: TextStyle(
                       fontSize: 16,
                       fontFamily: "sans",
-
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
                   ),
-                  Flexible(
+                  InkWell(
+                    onTap: () {
+                      Get.to(HomePage(
+                        url: widget.webAdress,
+                      ));
+                    },
                     child: Text(
                       "${widget.webAdress}",
                       style: TextStyle(
                         fontSize: 16,
                         fontFamily: "sans",
-
                         fontWeight: FontWeight.w400,
-                        color: Colors.black,
+                        color: Colors.blue,
                       ),
                     ),
                   ),

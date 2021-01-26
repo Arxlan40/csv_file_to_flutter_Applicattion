@@ -10,7 +10,6 @@ import 'Country.dart';
 import 'ProducerList.dart';
 import 'localstorage.dart';
 
-
 class HomeWine extends StatelessWidget {
   double _height;
   double _width;
@@ -24,131 +23,44 @@ class HomeWine extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color(0xFF800000),
         elevation: 5,
-        title: Center(
-            child: Text(
-              "LA GUIDA DEI VINI NEL MONDO",
-              style:
-              TextStyle(fontSize: 18, fontFamily: "sans", color: Colors.white),
-            )),
+        // title: Center(
+        //     child: Text(
+        //       "LA GUIDA DEI VINI NEL MONDO",
+        //       style:
+        //       TextStyle(fontSize: 18, fontFamily: "sans", color: Colors.white),
+        //     )),
       ),
       body: ListView(
         children: [
           InkWell(
-            onTap: (){
+            onTap: () {
               Get.to(MyHomePage(type: "redgrap", title: "RED WINE BY GRAPE"));
 
-           //   Get.to(Countries(type: "redgrap",title: "RED WINE BY GRAPE",));
-
+              //   Get.to(Countries(type: "redgrap",title: "RED WINE BY GRAPE",));
             },
             child: Padding(
-              padding: const EdgeInsets.only(top:20.0),
+              padding: const EdgeInsets.only(top: 20.0),
               child: Column(
                 children: [
                   Row(
-                    crossAxisAlignment:
-                    CrossAxisAlignment
-                        .start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Expanded(
                         child: Padding(
-                          padding:
-                          const EdgeInsets
-                              .only(
-                              top: 20.0,
-                              left: 10,
-                          bottom: 30),
+                          padding: const EdgeInsets.only(
+                              top: 20.0, left: 10, bottom: 30),
                           child: Container(
-                            padding: EdgeInsets
-                                .only(
-                                left:
-                                5),
+                            padding: EdgeInsets.only(left: 5),
                             child: Column(
-                              mainAxisAlignment:
-                              MainAxisAlignment
-                                  .center,
-                              crossAxisAlignment:
-                              CrossAxisAlignment
-                                  .start,
-                              children: <
-                                  Widget>[
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
                                 Text(
-                                 "Red Wine By Grape", style:
-                                  TextStyle(
-                                    fontSize:
-                                    18,
+                                  "Red Wine By Grape",
+                                  style: TextStyle(
+                                      fontSize: 18,
                                       fontWeight: FontWeight.bold,
-                                      fontFamily: "sans"
-                                  ),
-                                ),
-                                ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                        const EdgeInsets
-                            .only(
-                            top: 20.0,
-                            right: 10),
-                        child: Icon(
-                          Icons
-                              .arrow_forward_ios,
-                          color:
-                          Colors.grey,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Divider(),
-                ],
-              ),
-            ),
-          ),
-          InkWell(
-            onTap: (){
-              Get.to(MyHomePage(type: "whitegrap", title: "WHITE WINE BY GRAPE"));
-
-            },
-            child: Padding(
-              padding: const EdgeInsets.only(top:20.0),
-              child: Column(
-                children: [
-                  Row(
-                    crossAxisAlignment:
-                    CrossAxisAlignment
-                        .start,
-                    children: <Widget>[
-                      Expanded(
-                        child: Padding(
-                          padding:
-                          const EdgeInsets
-                              .only(
-                              top: 20.0,
-                              left: 10,
-                              bottom: 30),
-                          child: Container(
-                            padding: EdgeInsets
-                                .only(
-                                left:
-                                5),
-                            child: Column(
-                              mainAxisAlignment:
-                              MainAxisAlignment
-                                  .center,
-                              crossAxisAlignment:
-                              CrossAxisAlignment
-                                  .start,
-                              children: <
-                                  Widget>[
-                                Text(
-                                  "White Wine By Grape", style:
-                                TextStyle(
-                                    fontSize:
-                                    18,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "sans"
-                                ),
+                                      fontFamily: "sans"),
                                 ),
                               ],
                             ),
@@ -156,16 +68,17 @@ class HomeWine extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding:
-                        const EdgeInsets
-                            .only(
-                            top: 20.0,
-                            right: 10),
+                        padding: const EdgeInsets.only(right: 35.0),
+                        child: Image.asset(
+                          "assets/files/red.jpeg",
+                          height: 70,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0, right: 10),
                         child: Icon(
-                          Icons
-                              .arrow_forward_ios,
-                          color:
-                          Colors.grey,
+                          Icons.arrow_forward_ios,
+                          color: Colors.grey,
                         ),
                       ),
                     ],
@@ -176,48 +89,33 @@ class HomeWine extends StatelessWidget {
             ),
           ),
           InkWell(
-            onTap: (){
-              Get.to(Countries(type: "redcount",title: "RED WINE BY COUNTRY"));
+            onTap: () {
+              Get.to(
+                  MyHomePage(type: "whitegrap", title: "WHITE WINE BY GRAPE"));
             },
             child: Padding(
-              padding: const EdgeInsets.only(top:20.0),
+              padding: const EdgeInsets.only(top: 20.0),
               child: Column(
                 children: [
                   Row(
-                    crossAxisAlignment:
-                    CrossAxisAlignment
-                        .start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Expanded(
                         child: Padding(
-                          padding:
-                          const EdgeInsets
-                              .only(
-                              top: 20.0,
-                              left: 10,
-                              bottom: 30),
+                          padding: const EdgeInsets.only(
+                              top: 20.0, left: 10, bottom: 30),
                           child: Container(
-                            padding: EdgeInsets
-                                .only(
-                                left:
-                                5),
+                            padding: EdgeInsets.only(left: 5),
                             child: Column(
-                              mainAxisAlignment:
-                              MainAxisAlignment
-                                  .center,
-                              crossAxisAlignment:
-                              CrossAxisAlignment
-                                  .start,
-                              children: <
-                                  Widget>[
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
                                 Text(
-                                  "Red Wine By Country", style:
-                                TextStyle(
-                                    fontSize:
-                                    18,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "sans"
-                                ),
+                                  "White Wine By Grape",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "sans"),
                                 ),
                               ],
                             ),
@@ -225,16 +123,17 @@ class HomeWine extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding:
-                        const EdgeInsets
-                            .only(
-                            top: 20.0,
-                            right: 10),
+                        padding: const EdgeInsets.only(right: 35.0),
+                        child: Image.asset(
+                          "assets/files/white.jpeg",
+                          height: 70,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0, right: 10),
                         child: Icon(
-                          Icons
-                              .arrow_forward_ios,
-                          color:
-                          Colors.grey,
+                          Icons.arrow_forward_ios,
+                          color: Colors.grey,
                         ),
                       ),
                     ],
@@ -245,48 +144,32 @@ class HomeWine extends StatelessWidget {
             ),
           ),
           InkWell(
-            onTap: (){
-              Get.to(Countries(type: "whitecount",title: "WHITE WINE BY COUNTRY"));
+            onTap: () {
+              Get.to(Countries(type: "redcount", title: "RED WINE BY COUNTRY"));
             },
             child: Padding(
-              padding: const EdgeInsets.only(top:20.0),
+              padding: const EdgeInsets.only(top: 20.0),
               child: Column(
                 children: [
                   Row(
-                    crossAxisAlignment:
-                    CrossAxisAlignment
-                        .start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Expanded(
                         child: Padding(
-                          padding:
-                          const EdgeInsets
-                              .only(
-                              top: 20.0,
-                              left: 10,
-                              bottom: 30),
+                          padding: const EdgeInsets.only(
+                              top: 20.0, left: 10, bottom: 30),
                           child: Container(
-                            padding: EdgeInsets
-                                .only(
-                                left:
-                                5),
+                            padding: EdgeInsets.only(left: 5),
                             child: Column(
-                              mainAxisAlignment:
-                              MainAxisAlignment
-                                  .center,
-                              crossAxisAlignment:
-                              CrossAxisAlignment
-                                  .start,
-                              children: <
-                                  Widget>[
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
                                 Text(
-                                  "White Wine By Country", style:
-                                TextStyle(
-                                    fontSize:
-                                    18,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "sans"
-                                ),
+                                  "Red Wine By Country",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "sans"),
                                 ),
                               ],
                             ),
@@ -294,16 +177,17 @@ class HomeWine extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding:
-                        const EdgeInsets
-                            .only(
-                            top: 20.0,
-                            right: 10),
+                        padding: const EdgeInsets.only(right: 35.0),
+                        child: Image.asset(
+                          "assets/files/red.jpeg",
+                          height: 70,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0, right: 10),
                         child: Icon(
-                          Icons
-                              .arrow_forward_ios,
-                          color:
-                          Colors.grey,
+                          Icons.arrow_forward_ios,
+                          color: Colors.grey,
                         ),
                       ),
                     ],
@@ -314,49 +198,87 @@ class HomeWine extends StatelessWidget {
             ),
           ),
           InkWell(
-
-            onTap: (){
+            onTap: () {
+              Get.to(Countries(
+                  type: "whitecount", title: "WHITE WINE BY COUNTRY"));
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: Column(
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 20.0, left: 10, bottom: 30),
+                          child: Container(
+                            padding: EdgeInsets.only(left: 5),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  "White Wine By Country",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "sans"),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 35.0),
+                        child: Image.asset(
+                          "assets/files/white.jpeg",
+                          height: 70,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0, right: 10),
+                        child: Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Divider(),
+                ],
+              ),
+            ),
+          ),
+          InkWell(
+            onTap: () {
               Get.to(ProducerList());
             },
             child: Padding(
-              padding: const EdgeInsets.only(top:20.0),
+              padding: const EdgeInsets.only(top: 20.0),
               child: Column(
                 children: [
                   Row(
-                    crossAxisAlignment:
-                    CrossAxisAlignment
-                        .start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Expanded(
                         child: Padding(
-                          padding:
-                          const EdgeInsets
-                              .only(
-                              top: 20.0,
-                              left: 10,
-                              bottom: 30),
+                          padding: const EdgeInsets.only(
+                              top: 20.0, left: 10, bottom: 30),
                           child: Container(
-                            padding: EdgeInsets
-                                .only(
-                                left:
-                                5),
+                            padding: EdgeInsets.only(left: 5),
                             child: Column(
-                              mainAxisAlignment:
-                              MainAxisAlignment
-                                  .center,
-                              crossAxisAlignment:
-                              CrossAxisAlignment
-                                  .start,
-                              children: <
-                                  Widget>[
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
                                 Text(
-                                  "Wine By Producers", style:
-                                TextStyle(
-                                    fontSize:
-                                    18,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "sans"
-                                ),
+                                  "Producer Lists",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "sans"),
                                 ),
                               ],
                             ),
@@ -364,16 +286,18 @@ class HomeWine extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding:
-                        const EdgeInsets
-                            .only(
-                            top: 20.0,
-                            right: 10),
+                        padding: const EdgeInsets.only(right: 23.0),
+                        child: Image.asset(
+                          "assets/files/producers.jpeg",
+                          height: 70,
+                          width: 80,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0, right: 10),
                         child: Icon(
-                          Icons
-                              .arrow_forward_ios,
-                          color:
-                          Colors.grey,
+                          Icons.arrow_forward_ios,
+                          color: Colors.grey,
                         ),
                       ),
                     ],
@@ -383,7 +307,6 @@ class HomeWine extends StatelessWidget {
               ),
             ),
           ),
-
         ],
       ),
     );

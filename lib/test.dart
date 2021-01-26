@@ -14,8 +14,8 @@ import 'dart:io';
 class MyHomePage extends StatefulWidget {
   String type;
   String title;
-String country;
-  MyHomePage({this.type, this.title,this.country});
+  String country;
+  MyHomePage({this.type, this.title, this.country});
 
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -34,13 +34,19 @@ class _MyHomePageState extends State<MyHomePage> {
     final idsw = whitedata.map((e) => e.wineType).toSet();
 
     setState(() {
-      widget.type =="redcount" ?
-      reddata =
-          item.where((value) => value.country == widget.country).toList()  :  widget.type =="whitecount" ? whitedata =
-         item.where((value) => value.country == widget.country).toList() : SizedBox();
-      widget.type == "redgrap" || widget.type == "redcount" ?
-     reddata.retainWhere((x) => ids.remove(x.wineType)): widget.type == "whitegrap" || widget.type == "whitecount" ? whitedata.retainWhere((x) => idsw.remove(x.wineType)) :SizedBox();
-
+      widget.type == "redcount"
+          ? reddata =
+              item.where((value) => value.country == widget.country).toList()
+          : widget.type == "whitecount"
+              ? whitedata = item
+                  .where((value) => value.country == widget.country)
+                  .toList()
+              : SizedBox();
+      widget.type == "redgrap" || widget.type == "redcount"
+          ? reddata.retainWhere((x) => ids.remove(x.wineType))
+          : widget.type == "whitegrap" || widget.type == "whitecount"
+              ? whitedata.retainWhere((x) => idsw.remove(x.wineType))
+              : SizedBox();
     });
   }
 
@@ -123,9 +129,9 @@ class _MyHomePageState extends State<MyHomePage> {
       whitedata = whitelists;
       loading = false;
     });
-    widget.type == "redgrap" || widget.type =="redcount" ?
-    _filter(reddata):
-    _filter(whitedata);
+    widget.type == "redgrap" || widget.type == "redcount"
+        ? _filter(reddata)
+        : _filter(whitedata);
 
     // } catch (e) {
     // }
@@ -192,17 +198,35 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               ))
-          : AppBar(
-              backgroundColor: Color(0xFF800000),
-              elevation: 5,
-        centerTitle: true,
-
-        title: Text(
-                "Wine Type",
-                style: TextStyle(
-                fontSize: 18, fontFamily: "sans", color: Colors.white),
-              ),
-            ),
+          : PreferredSize(
+              preferredSize: Size.fromHeight(250),
+              child: AppBar(
+                backgroundColor: Colors.transparent,
+                flexibleSpace: Stack(
+                  children: [
+                    Image(
+                      image: widget.type == "redgrap"
+                          ? AssetImage('assets/files/red.jpeg')
+                          : widget.type == "redcount"
+                              ? AssetImage("assets/files/red.jpeg")
+                              : AssetImage("assets/files/white.jpeg"),
+                      fit: BoxFit.fill,
+                      height: 600,
+                      width: 700,
+                    ),
+                    // Center(
+                    //   child: Text(
+                    //     "LE AZIENDE",
+                    //     style: TextStyle(
+                    //         fontSize: 28,
+                    //         fontWeight: FontWeight.bold,
+                    //         color: Colors.white,
+                    //         fontFamily: "sans"),
+                    //   ),
+                    // ),
+                  ],
+                ),
+              )),
       backgroundColor: Colors.white,
       body: loading
           ? Center(child: CircularProgressIndicator())
@@ -256,12 +280,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                       //     .grapeVarieties,
                                       // producer:
                                       //     _searchResult[index].producer,
-                                      producer:
-                                      _searchResult[index]
-                                          .wineType,
+                                      winetype: _searchResult[index].wineType,
                                       type: widget.type,
                                       title: widget.title,
-                                    ));                                  },
+                                      country: widget.country,
+                                    ));
+                                  },
                                   child: Column(
                                     children: [
                                       Row(
@@ -347,12 +371,13 @@ class _MyHomePageState extends State<MyHomePage> {
                                       //     .grapeVarieties,
                                       // producer:
                                       //     _searchResult[index].producer,
-                                      producer:
-                                      reddata[index]
-                                          .wineType,
+                                      country: widget.country,
+
+                                      winetype: reddata[index].wineType,
                                       type: widget.type,
                                       title: widget.title,
-                                    ));                                  },
+                                    ));
+                                  },
                                   child: Column(
                                     children: [
                                       Row(
@@ -373,8 +398,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                       CrossAxisAlignment.start,
                                                   children: <Widget>[
                                                     Text(
-                                                      reddata[index]
-                                                          .wineType,
+                                                      reddata[index].wineType,
                                                       style: TextStyle(
                                                         fontSize: 16,
                                                       ),
@@ -449,6 +473,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                           //     _searchResult[index].wineType,
                                           // country:
                                           //     _searchResult[index].country,
+                                          country: widget.country,
+
                                           // village:
                                           //     _searchResult[index].village,
                                           // aging: _searchResult[index]
@@ -458,12 +484,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                           //     .grapeVarieties,
                                           // producer:
                                           //     _searchResult[index].producer,
-                                          producer:
-                                          _searchResult[index]
-                                              .wineType,
+                                          winetype:
+                                              _searchResult[index].wineType,
                                           type: widget.type,
                                           title: widget.title,
-                                        ));                                      },
+                                        ));
+                                      },
                                       child: Column(
                                         children: [
                                           Row(
@@ -545,6 +571,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                           // wineType:
                                           //     _searchResult[index].wineType,
                                           // country:
+                                          country: widget.country,
+
                                           //     _searchResult[index].country,
                                           // village:
                                           //     _searchResult[index].village,
@@ -555,12 +583,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                           //     .grapeVarieties,
                                           // producer:
                                           //     _searchResult[index].producer,
-                                          producer:
-                                          whitedata[index]
-                                              .wineType,
+                                          winetype: whitedata[index].wineType,
                                           type: widget.type,
                                           title: widget.title,
-                                        ));                                      },
+                                        ));
+                                      },
                                       child: Column(
                                         children: [
                                           Row(
@@ -673,11 +700,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                               //     .grapeVarieties,
                                               // producer:
                                               //     _searchResult[index].producer,
-                                              producer:
-                                                  _searchResult[index]
-                                                      .wineType,
+                                              winetype:
+                                                  _searchResult[index].wineType,
                                               type: widget.type,
                                               title: widget.title,
+                                              country: widget.country,
                                             ));
                                           },
                                           child: Column(
@@ -792,6 +819,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                               // wineRegion:
                                               //     reddata[index].wineRegion,
                                               // wineType: reddata[index].wineType,
+                                              country: widget.country,
+
                                               // country: reddata[index].country,
                                               // village: reddata[index].village,
                                               // aging:
@@ -800,8 +829,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                               // grapeVar:
                                               //     reddata[index].grapeVarieties,
                                               // producer: reddata[index].producer,
-                                              producer: reddata[index]
-                                                  .wineType,
+                                              winetype: reddata[index].wineType,
                                               type: widget.type,
                                               title: widget.title,
                                             ));
@@ -965,9 +993,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   //         .producer,
                                                   type: widget.type,
                                                   title: widget.title,
-                                                  producer:
+                                                  winetype:
                                                       _searchResultwhite[index]
                                                           .wineType,
+                                                  country: widget.country,
                                                 ));
                                               },
                                               child: Column(
@@ -1100,10 +1129,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   // producer:
                                                   //     whitedata[index].producer,
                                                   type: widget.type,
+                                                  country: widget.country,
+
                                                   title: widget.title,
-                                                  producer:
-                                                      whitedata[index]
-                                                          .wineType,
+                                                  winetype:
+                                                      whitedata[index].wineType,
                                                 ));
                                               },
                                               child: Column(
@@ -1241,8 +1271,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   onTap: () {
                                                     Get.to(DetailScreen(
                                                       fav: false,
-                                                      addnote: _searchResult[index]
-                                                          .addnote ,
+                                                      addnote:
+                                                          _searchResult[index]
+                                                              .addnote,
                                                       webAdress:
                                                           _searchResult[index]
                                                               .webAddress,
@@ -1378,8 +1409,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   onTap: () {
                                                     Get.to(DetailScreen(
                                                       fav: false,
-                                                      addnote:reddata[index]
-                                                          .addnote ,
+                                                      addnote: reddata[index]
+                                                          .addnote,
                                                       webAdress: reddata[index]
                                                           .webAddress,
                                                       wineColor:
@@ -1433,18 +1464,19 @@ class _MyHomePageState extends State<MyHomePage> {
                                                                           .start,
                                                                   children: <
                                                                       Widget>[
-                                                                    Text(reddata[index]
-                                                                              .producer,
-                                                                         style:
+                                                                    Text(
+                                                                      reddata[index]
+                                                                          .producer,
+                                                                      style:
                                                                           TextStyle(
                                                                         fontSize:
                                                                             16,
                                                                       ),
                                                                     ),
                                                                     Text(
-                                                                     reddata[index]
-                                                                              .suggestedBottle,
-                                                                         style: TextStyle(
+                                                                      reddata[index]
+                                                                          .suggestedBottle,
+                                                                      style: TextStyle(
                                                                           fontSize:
                                                                               14,
                                                                           color:
@@ -1510,9 +1542,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   onTap: () {
                                                     Get.to(DetailScreen(
                                                       fav: false,
-                                                      addnote:_searchResultwhite[
-                                                      index]
-                                                          .addnote ,
+                                                      addnote:
+                                                          _searchResultwhite[
+                                                                  index]
+                                                              .addnote,
                                                       webAdress:
                                                           _searchResultwhite[
                                                                   index]
@@ -1586,17 +1619,20 @@ class _MyHomePageState extends State<MyHomePage> {
                                                                   children: <
                                                                       Widget>[
                                                                     Text(
-                                                                     _searchResultwhite[index]
-                                                                              .producer,
-                                                                         style:
+                                                                      _searchResultwhite[
+                                                                              index]
+                                                                          .producer,
+                                                                      style:
                                                                           TextStyle(
                                                                         fontSize:
                                                                             16,
                                                                       ),
                                                                     ),
                                                                     Text(
-                                                                              _searchResultwhite[index].suggestedBottle,
-                                                                               style: TextStyle(
+                                                                      _searchResultwhite[
+                                                                              index]
+                                                                          .suggestedBottle,
+                                                                      style: TextStyle(
                                                                           fontSize:
                                                                               14,
                                                                           color:
@@ -1640,8 +1676,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   onTap: () {
                                                     Get.to(DetailScreen(
                                                       fav: false,
-                                                      addnote:  whitedata[index]
-                                                          .addnote ,
+                                                      addnote: whitedata[index]
+                                                          .addnote,
                                                       webAdress:
                                                           whitedata[index]
                                                               .webAddress,
@@ -1699,16 +1735,19 @@ class _MyHomePageState extends State<MyHomePage> {
                                                                   children: <
                                                                       Widget>[
                                                                     Text(
-                                                                      whitedata[index]
-                                                                              .producer,
-                                                                        style:
+                                                                      whitedata[
+                                                                              index]
+                                                                          .producer,
+                                                                      style:
                                                                           TextStyle(
                                                                         fontSize:
                                                                             16,
                                                                       ),
                                                                     ),
                                                                     Text(
-                                                                               whitedata[index].suggestedBottle,
+                                                                      whitedata[
+                                                                              index]
+                                                                          .suggestedBottle,
                                                                       style: TextStyle(
                                                                           fontSize:
                                                                               14,

@@ -1,12 +1,10 @@
 import 'dart:convert';
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path_provider/path_provider.dart';
-
-import 'localstorage.dart';
+import 'package:spreadsheet/Webview.dart';
+import 'package:get/get.dart';
 
 const String kFileName = 'winefav.json';
 
@@ -132,15 +130,23 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFF800000),
-        elevation: 5,
-        centerTitle: true,
-        title: Text(
-          "${widget.producer}",
-          style:
-              TextStyle(fontSize: 18, fontFamily: "sans", color: Colors.white),
-        ),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(kToolbarHeight/1.2),
+        child: widget.wineColor == "redcount" || widget.wineColor == "redgrap"
+            ? Image.asset(
+                'assets/files/redwine.jpeg',
+                fit: BoxFit.fitWidth,
+              )
+            : Image.asset(
+                'assets/files/whitewine.jpeg',
+                fit: BoxFit.fitWidth,
+              ),
+
+        // title: Text(
+        //   "${widget.producer}",
+        //   style:
+        //       TextStyle(fontSize: 18, fontFamily: "sans", color: Colors.white),
+        // ),
       ),
 
       // PreferredSize(
@@ -192,6 +198,7 @@ class _DetailScreenState extends State<DetailScreen> {
       // ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // ListTile(
             //   title: Text("Wine Color"),
@@ -211,13 +218,15 @@ class _DetailScreenState extends State<DetailScreen> {
                         color: Colors.black,
                         fontFamily: "sans"),
                   ),
-                  Text(
-                    "${widget.producer}",
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black,
-                        fontFamily: "sans"),
+                  Flexible(
+                    child: Text(
+                      "${widget.producer}",
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.black,
+                          fontFamily: "sans"),
+                    ),
                   ),
                 ],
               ),
@@ -235,7 +244,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         fontFamily: "sans"),
                   ),
                   Text(
-                    "${widget.wineType}",
+                    "${widget.wineType != null ? widget.wineType : ""}",
                     style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
@@ -259,13 +268,15 @@ class _DetailScreenState extends State<DetailScreen> {
                       color: Colors.black,
                     ),
                   ),
-                  Text(
-                    "${widget.grapeVar}",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: "sans",
-                      color: Colors.black,
+                  Flexible(
+                    child: Text(
+                      "${widget.grapeVar != null ? widget.grapeVar : ""}",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: "sans",
+                        color: Colors.black,
+                      ),
                     ),
                   ),
                 ],
@@ -304,7 +315,34 @@ class _DetailScreenState extends State<DetailScreen> {
                     ),
                   ),
                   Text(
-                    "${widget.country}",
+                    "${widget.country != null ? widget.country : ""}",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black,
+                      fontFamily: "sans",
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 25.0, left: 15),
+              child: Row(
+                children: [
+                  Flexible(
+                    child: Text(
+                      "Wine Region: ",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "sans",
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    "${widget.wineRegion != null ? widget.wineRegion : ""}",
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
@@ -320,7 +358,7 @@ class _DetailScreenState extends State<DetailScreen> {
               child: Row(
                 children: [
                   Text(
-                    "Wine Region: ",
+                    "Village: ",
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -328,13 +366,15 @@ class _DetailScreenState extends State<DetailScreen> {
                       color: Colors.black,
                     ),
                   ),
-                  Text(
-                    "${widget.wineRegion}",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black,
-                      fontFamily: "sans",
+                  Flexible(
+                    child: Text(
+                      "${widget.village != null ? widget.village : ""}",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black,
+                        fontFamily: "sans",
+                      ),
                     ),
                   ),
                 ],
@@ -342,7 +382,8 @@ class _DetailScreenState extends State<DetailScreen> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 25.0, left: 15),
-              child: Row(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     "Recommended Bottle: ",
@@ -353,13 +394,16 @@ class _DetailScreenState extends State<DetailScreen> {
                       color: Colors.black,
                     ),
                   ),
-                  Text(
-                    "${widget.suggestedBottle}",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: "sans",
-                      color: Colors.black,
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "${widget.suggestedBottle != null ? widget.suggestedBottle : ""}",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: "sans",
+                        color: Colors.black,
+                      ),
                     ),
                   ),
                 ],
@@ -370,7 +414,7 @@ class _DetailScreenState extends State<DetailScreen> {
               child: Row(
                 children: [
                   Text(
-                    "Potential Ageing Year : ",
+                    "Potential Ageing Years : ",
                     style: TextStyle(
                       fontSize: 16,
                       fontFamily: "sans",
@@ -379,11 +423,10 @@ class _DetailScreenState extends State<DetailScreen> {
                     ),
                   ),
                   Text(
-                    "${widget.aging}",
+                    "${widget.aging != null ? widget.aging : ""}",
                     style: TextStyle(
                       fontSize: 16,
                       fontFamily: "sans",
-
                       fontWeight: FontWeight.w400,
                       color: Colors.black,
                     ),
@@ -397,22 +440,19 @@ class _DetailScreenState extends State<DetailScreen> {
                 children: [
                   Text(
                     "Note: ",
-
                     style: TextStyle(
                       fontSize: 16,
                       fontFamily: "sans",
-
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
                   ),
                   Flexible(
                     child: Text(
-                      "${widget.note}",
+                      "${widget.note != null ? widget.note : ""}",
                       style: TextStyle(
                         fontSize: 16,
                         fontFamily: "sans",
-
                         fontWeight: FontWeight.w400,
                         color: Colors.black,
                       ),
@@ -432,18 +472,23 @@ class _DetailScreenState extends State<DetailScreen> {
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                       fontFamily: "sans",
-
                     ),
                   ),
                   Flexible(
-                    child: Text(
-                      "${widget.webAdress}",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontFamily: "sans",
-
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black,
+                    child: InkWell(
+                      onTap: () {
+                        Get.to(HomePage(
+                          url: widget.webAdress,
+                        ));
+                      },
+                      child: Text(
+                        "${widget.webAdress != null ? widget.webAdress : ""}",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: "sans",
+                          fontWeight: FontWeight.w400,
+                          color: Colors.blue,
+                        ),
                       ),
                     ),
                   ),
@@ -459,18 +504,16 @@ class _DetailScreenState extends State<DetailScreen> {
                     style: TextStyle(
                       fontSize: 16,
                       fontFamily: "sans",
-
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
                   ),
                   Flexible(
                     child: Text(
-                      "${widget.addnote}",
+                      "${widget.addnote != null ? widget.addnote : ""}",
                       style: TextStyle(
                         fontSize: 16,
                         fontFamily: "sans",
-
                         fontWeight: FontWeight.w400,
                         color: Colors.black,
                       ),
