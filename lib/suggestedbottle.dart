@@ -351,6 +351,7 @@ class _SuggestedbottleState extends State<Suggestedbottle> {
                                     print("sssssss${widget.type}");
                                     Get.to(DetailScreen(
                                       fav: false,
+                                      serial: reddata[index].serial,
                                       addnote: reddata[index].addnote,
                                       webAdress: reddata[index].webAddress,
                                       wineColor: widget.type,
@@ -543,7 +544,7 @@ class _SuggestedbottleState extends State<Suggestedbottle> {
                                   itemBuilder: (BuildContext context, index) {
                                     return InkWell(
                                       onTap: () {
-                                                                            print("sssssss${widget.type}");
+                                        print("sssssss${widget.type}");
 
                                         Get.to(DetailScreen(
                                           fav: false,
@@ -551,6 +552,7 @@ class _SuggestedbottleState extends State<Suggestedbottle> {
                                           webAdress:
                                               whitedata[index].webAddress,
                                           wineColor: widget.type,
+                                          serial: whitedata[index].serial,
                                           wineRegion:
                                               whitedata[index].wineRegion,
                                           wineType: whitedata[index].wineType,
@@ -802,6 +804,7 @@ class _SuggestedbottleState extends State<Suggestedbottle> {
                                               grapeVar:
                                                   reddata[index].grapeVarieties,
                                               producer: reddata[index].producer,
+                                              serial: reddata[index].serial,
                                               suggestedBottle: reddata[index]
                                                   .suggestedBottle,
                                             ));
@@ -1061,14 +1064,15 @@ class _SuggestedbottleState extends State<Suggestedbottle> {
                                                   fav: false,
                                                   webAdress: whitedata[index]
                                                       .webAddress,
-                                                  wineColor:
-                                                     widget.type,
+                                                  wineColor: widget.type,
                                                   wineRegion: whitedata[index]
                                                       .wineRegion,
                                                   addnote:
                                                       whitedata[index].addnote,
                                                   wineType:
                                                       whitedata[index].wineType,
+                                                  serial:
+                                                      whitedata[index].serial,
                                                   country:
                                                       whitedata[index].country,
                                                   village:
@@ -1368,6 +1372,8 @@ class _SuggestedbottleState extends State<Suggestedbottle> {
                                                           .wineRegion,
                                                       wineType: reddata[index]
                                                           .wineType,
+                                                      serial:
+                                                          reddata[index].serial,
                                                       country: reddata[index]
                                                           .country,
                                                       village: reddata[index]
@@ -1670,6 +1676,8 @@ class _SuggestedbottleState extends State<Suggestedbottle> {
                                                               .wineRegion,
                                                       wineType: whitedata[index]
                                                           .wineType,
+                                                      serial: whitedata[index]
+                                                          .serial,
                                                       country: whitedata[index]
                                                           .country,
                                                       village: whitedata[index]

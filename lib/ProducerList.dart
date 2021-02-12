@@ -86,16 +86,6 @@ class _ProducerListState extends State<ProducerList> {
                   height: 600,
                   width: 700,
                 ),
-                // Center(
-                //   child: Text(
-                //     "LE AZIENDE",
-                //     style: TextStyle(
-                //         fontSize: 28,
-                //         fontWeight: FontWeight.bold,
-                //         color: Colors.white,
-                //         fontFamily: "sans"),
-                //   ),
-                // ),
               ],
             ),
           )),
@@ -124,6 +114,7 @@ class _ProducerListState extends State<ProducerList> {
                             onTap: () {
                               Get.to(ProducerDetail(
                                 fav: false,
+                                serial: _searchResult[index].serial,
                                 webAdress: _searchResult[index].webAddress,
                                 wineRegion: _searchResult[index].wineRegion,
                                 country: _searchResult[index].country,
@@ -190,6 +181,7 @@ class _ProducerListState extends State<ProducerList> {
                                 country: prouducers[index].country,
                                 producer: prouducers[index].producer,
                                 village: prouducers[index].village,
+                                serial: prouducers[index].serial,
                               ));
                             },
                             child: Column(

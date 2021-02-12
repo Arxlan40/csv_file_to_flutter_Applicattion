@@ -214,16 +214,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       height: 600,
                       width: 700,
                     ),
-                    // Center(
-                    //   child: Text(
-                    //     "LE AZIENDE",
-                    //     style: TextStyle(
-                    //         fontSize: 28,
-                    //         fontWeight: FontWeight.bold,
-                    //         color: Colors.white,
-                    //         fontFamily: "sans"),
-                    //   ),
-                    // ),
                   ],
                 ),
               )),
@@ -234,15 +224,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ? Scaffold(
                   body: ListView(
                     children: [
-                      // TextField(
-                      //   controller: textcontroller,
-                      //   onChanged: onSearchTextChanged,
-                      //   decoration: new InputDecoration(
-                      //       prefixIcon:
-                      //           new Icon(Icons.search, color: Colors.grey),
-                      //       hintText: "Search...",
-                      //       hintStyle: new TextStyle(color: Colors.grey)),
-                      // ),
                       _searchResult.length != 0 ||
                               textcontroller.text
                                   .trim()

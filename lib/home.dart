@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:spreadsheet/About.dart';
 import 'package:spreadsheet/Favourite.dart';
 import 'package:spreadsheet/test.dart';
 
-import 'Contact.dart';
 import 'Country.dart';
 import 'ProducerList.dart';
-import 'localstorage.dart';
 
 class HomeWine extends StatelessWidget {
   double _height;
@@ -21,14 +18,13 @@ class HomeWine extends StatelessWidget {
     _width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          "Wine Time",
+          style: TextStyle(fontFamily: "sans"),
+        ),
         backgroundColor: Color(0xFF800000),
         elevation: 5,
-        // title: Center(
-        //     child: Text(
-        //       "LA GUIDA DEI VINI NEL MONDO",
-        //       style:
-        //       TextStyle(fontSize: 18, fontFamily: "sans", color: Colors.white),
-        //     )),
       ),
       body: ListView(
         children: [
@@ -274,7 +270,7 @@ class HomeWine extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  "Producer Lists",
+                                  "Producer List",
                                   style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
@@ -303,6 +299,60 @@ class HomeWine extends StatelessWidget {
                     ],
                   ),
                   Divider(),
+                ],
+              ),
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              Get.to(Favourite());
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: Column(
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 20.0, left: 10, bottom: 30),
+                          child: Container(
+                            padding: EdgeInsets.only(left: 5),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  "Favourite List",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "sans"),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                          padding: const EdgeInsets.only(right: 40.0),
+                          child: Icon(
+                            Icons.favorite,
+                            color: Color(0xFF800000),
+                            size: 50,
+                          )),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0, right: 10),
+                        child: Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
+                  ),
+                  //    Divider(),
                 ],
               ),
             ),

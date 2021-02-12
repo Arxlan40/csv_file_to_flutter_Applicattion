@@ -2,9 +2,12 @@ import 'dart:convert';
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spreadsheet/Webview.dart';
 import 'package:get/get.dart';
+import 'package:spreadsheet/model.dart';
 
 const String kFileName = 'winefav.json';
 
@@ -21,11 +24,13 @@ class DetailScreen extends StatefulWidget {
   String webAdress;
   String note;
   String addnote;
+  String serial;
 
   bool fav;
 
   DetailScreen(
       {this.producer,
+      this.serial,
       this.country,
       this.suggestedBottle,
       this.wineRegion,
@@ -45,9 +50,9 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
   List _json = [];
-
+  String serialnumber;
   String _jsonString;
-
+  bool _favourite = false;
   File _filePath;
 
   Future<String> get _localPath async {
@@ -63,6 +68,12 @@ class _DetailScreenState extends State<DetailScreen> {
   bool _fileExists = false;
 
   void _readJson() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    var _serial = localStorage.getString(widget.serial);
+    setState(() {
+      serialnumber = _serial;
+    });
+    print("${_serial}adssdasdasda");
     // Initialize _filePath
     _filePath = await _localFile;
 
@@ -96,15 +107,18 @@ class _DetailScreenState extends State<DetailScreen> {
     List _newJson = [
       {
         "Color": widget.wineColor,
-        'Aging in Years': widget.aging,
+        'Potential Ageing Years': widget.aging,
         "Wine Type": widget.wineType,
-        "Grape Varieties": widget.grapeVar,
+        "Grape Variety": widget.grapeVar,
         "Village": widget.village,
         "Wine Region": widget.wineRegion,
         "Country": widget.country,
         "Producer": widget.producer,
         "Suggested Bottle": widget.suggestedBottle,
-        "web address": widget.webAdress
+        "Web Address": widget.webAdress,
+        "Notes": widget.note,
+        "Additional Notes": widget.addnote,
+        "Serial": widget.serial,
       }
     ];
     print('1.(_writeJson) _newJson: $_newJson');
@@ -131,7 +145,7 @@ class _DetailScreenState extends State<DetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(kToolbarHeight/1.2),
+        preferredSize: Size.fromHeight(kToolbarHeight / 1.2),
         child: widget.wineColor == "redcount" || widget.wineColor == "redgrap"
             ? Image.asset(
                 'assets/files/redwine.jpeg',
@@ -141,386 +155,358 @@ class _DetailScreenState extends State<DetailScreen> {
                 'assets/files/whitewine.jpeg',
                 fit: BoxFit.fitWidth,
               ),
-
-        // title: Text(
-        //   "${widget.producer}",
-        //   style:
-        //       TextStyle(fontSize: 18, fontFamily: "sans", color: Colors.white),
-        // ),
       ),
-
-      // PreferredSize(
-      //   preferredSize: Size.fromHeight(150),
-      //   child: AppBar(
-      //     backgroundColor: Color(0xFF44281d),
-      //     leading: IconButton(
-      //       onPressed: () {
-      //         Navigator.pop(context);
-      //       },
-      //       icon: Icon(Icons.arrow_back),
-      //     ),
-      //     flexibleSpace: Column(
-      //       mainAxisAlignment: MainAxisAlignment.center,
-      //       children: [
-      //         Padding(
-      //           padding: const EdgeInsets.only(top: 50.0),
-      //           child: Text(
-      //             "Wine Created By ${widget.country}",
-      //             style: TextStyle(
-      //                 fontSize: 24,
-      //                 fontWeight: FontWeight.w500,
-      //                 color: Colors.white),
-      //           ),
-      //         ),
-      //         Text(
-      //           "${widget.wineColor} Wine",
-      //           style: TextStyle(
-      //               fontSize: 22,
-      //               fontWeight: FontWeight.w300,
-      //               color: Colors.white),
-      //         )
-      //       ],
-      //     ),
-      //     title: widget.fav ? SizedBox(): ListTile(
-      //     //     trailing: IconButton(
-      //     //   onPressed: () async {
-      //     //     _writeJson();
-      //     //     final file = await _localFile;
-      //     //     _fileExists = await file.exists();
-      //     //     Fluttertoast.showToast(msg: "Aggiunto ai preferiti");
-      //     //   },
-      //     //   icon: Icon(
-      //     //     Icons.favorite_border,
-      //     //     color: Colors.white,
-      //     //   ),
-      //     // )),
-      //     )  ),
-      // ),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Stack(
           children: [
-            // ListTile(
-            //   title: Text("Wine Color"),
-            //   subtitle: Text(
-            //     "${widget.wineColor}",
-            //   ),
-            // ),
-            Padding(
-              padding: const EdgeInsets.only(top: 30.0, left: 15),
-              child: Row(
-                children: [
-                  Text(
-                    "Producer: ",
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                        fontFamily: "sans"),
+            Positioned(
+              right: 30,
+              top: 40,
+              child: widget.fav
+                  ? SizedBox()
+                  : _favourite
+                      ? Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Icon(
+                            Icons.favorite,
+                            color: Colors.red,
+                            size: 40,
+                          ),
+                        )
+                      : serialnumber == widget.serial
+                          ? Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Icon(
+                                Icons.favorite,
+                                color: Colors.red,
+                                size: 40,
+                              ),
+                            )
+                          : IconButton(
+                              onPressed: () async {
+                                SharedPreferences localStorage =
+                                    await SharedPreferences.getInstance();
+
+                                setState(() {
+                                  _favourite = true;
+                                });
+
+                                localStorage.setString(
+                                    widget.serial, widget.serial);
+
+                                _writeJson();
+                                final file = await _localFile;
+                                _fileExists = await file.exists();
+                                Fluttertoast.showToast(
+                                    msg: "Aggiunto ai preferiti");
+                              },
+                              icon: Icon(
+                            Icons.favorite_outline,
+                                color: Colors.red,
+                                size: 40,
+                              ),
+                            ),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 30.0, left: 15),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Producer: ",
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontFamily: "sans"),
+                      ),
+                      Flexible(
+                        child: Text(
+                          "${widget.producer}",
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.black,
+                              fontFamily: "sans"),
+                        ),
+                      ),
+                    ],
                   ),
-                  Flexible(
-                    child: Text(
-                      "${widget.producer}",
-                      style: TextStyle(
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 30.0, left: 15),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Type of Wine: ",
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontFamily: "sans"),
+                      ),
+                      Text(
+                        "${widget.wineType != null ? widget.wineType : ""}",
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black,
+                            fontFamily: "sans"),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 25.0, left: 15),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Grape Variety: ",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "sans",
+                          color: Colors.black,
+                        ),
+                      ),
+                      Flexible(
+                        child: Text(
+                          "${widget.grapeVar != null ? widget.grapeVar : ""}",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            fontFamily: "sans",
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 25.0, left: 15),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Country: ",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                          fontFamily: "sans",
+                        ),
+                      ),
+                      Text(
+                        "${widget.country != null ? widget.country : ""}",
+                        style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w400,
                           color: Colors.black,
-                          fontFamily: "sans"),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 30.0, left: 15),
-              child: Row(
-                children: [
-                  Text(
-                    "Type of Wine: ",
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                        fontFamily: "sans"),
-                  ),
-                  Text(
-                    "${widget.wineType != null ? widget.wineType : ""}",
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black,
-                        fontFamily: "sans"),
-                  ),
-                ],
-              ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.only(top: 25.0, left: 15),
-              child: Row(
-                children: [
-                  Text(
-                    "Grape Variety: ",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: "sans",
-                      color: Colors.black,
-                    ),
-                  ),
-                  Flexible(
-                    child: Text(
-                      "${widget.grapeVar != null ? widget.grapeVar : ""}",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: "sans",
-                        color: Colors.black,
+                          fontFamily: "sans",
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-            // Padding(
-            //   padding: const EdgeInsets.only(top:25.0,left:15),
-            //   child: Row(children: [
-            //     Text("SUGGESTED BOTTLE : ", style: TextStyle(
-            //       fontSize: 16,
-            //       fontWeight: FontWeight.bold,
-            //       color: Colors.black,
-            //     ),),
-            //     Flexible(
-            //       child: Text(
-            //         "${widget.suggestedBottle}",style: TextStyle(
-            //         fontSize: 16,
-            //         fontWeight: FontWeight.w400,
-            //         color: Colors.black,
-            //       ),
-            //       ),
-            //     ),
-            //   ],),
-            // ),
-            Padding(
-              padding: const EdgeInsets.only(top: 25.0, left: 15),
-              child: Row(
-                children: [
-                  Text(
-                    "Country: ",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      fontFamily: "sans",
-                    ),
-                  ),
-                  Text(
-                    "${widget.country != null ? widget.country : ""}",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black,
-                      fontFamily: "sans",
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 25.0, left: 15),
-              child: Row(
-                children: [
-                  Flexible(
-                    child: Text(
-                      "Wine Region: ",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: "sans",
-                        color: Colors.black,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 25.0, left: 15),
+                  child: Row(
+                    children: [
+                      Flexible(
+                        child: Text(
+                          "Wine Region: ",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "sans",
+                            color: Colors.black,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  Text(
-                    "${widget.wineRegion != null ? widget.wineRegion : ""}",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black,
-                      fontFamily: "sans",
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 25.0, left: 15),
-              child: Row(
-                children: [
-                  Text(
-                    "Village: ",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: "sans",
-                      color: Colors.black,
-                    ),
-                  ),
-                  Flexible(
-                    child: Text(
-                      "${widget.village != null ? widget.village : ""}",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black,
-                        fontFamily: "sans",
+                      Text(
+                        "${widget.wineRegion != null ? widget.wineRegion : ""}",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.black,
+                          fontFamily: "sans",
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 25.0, left: 15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Recommended Bottle: ",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: "sans",
-                      color: Colors.black,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "${widget.suggestedBottle != null ? widget.suggestedBottle : ""}",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: "sans",
-                        color: Colors.black,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 25.0, left: 15),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Village: ",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "sans",
+                          color: Colors.black,
+                        ),
                       ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 25.0, left: 15),
-              child: Row(
-                children: [
-                  Text(
-                    "Potential Ageing Years : ",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: "sans",
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                  Text(
-                    "${widget.aging != null ? widget.aging : ""}",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: "sans",
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 25.0, left: 15),
-              child: Row(
-                children: [
-                  Text(
-                    "Note: ",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: "sans",
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                  Flexible(
-                    child: Text(
-                      "${widget.note != null ? widget.note : ""}",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontFamily: "sans",
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black,
+                      Flexible(
+                        child: Text(
+                          "${widget.village != null ? widget.village : ""}",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black,
+                            fontFamily: "sans",
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 25.0, left: 15),
-              child: Row(
-                children: [
-                  Text(
-                    "Web Address: ",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      fontFamily: "sans",
-                    ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 25.0, left: 15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Recommended Bottle: ",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "sans",
+                          color: Colors.black,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "${widget.suggestedBottle != null ? widget.suggestedBottle : ""}",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            fontFamily: "sans",
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  Flexible(
-                    child: InkWell(
-                      onTap: () {
-                        Get.to(HomePage(
-                          url: widget.webAdress,
-                        ));
-                      },
-                      child: Text(
-                        "${widget.webAdress != null ? widget.webAdress : ""}",
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 25.0, left: 15),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Potential Ageing Years : ",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: "sans",
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                      Text(
+                        "${widget.aging != null ? widget.aging : ""}",
                         style: TextStyle(
                           fontSize: 16,
                           fontFamily: "sans",
                           fontWeight: FontWeight.w400,
-                          color: Colors.blue,
+                          color: Colors.black,
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 25.0, left: 15),
-              child: Row(
-                children: [
-                  Text(
-                    "Additional Note: ",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: "sans",
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                  Flexible(
-                    child: Text(
-                      "${widget.addnote != null ? widget.addnote : ""}",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontFamily: "sans",
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 25.0, left: 15),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Note: ",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: "sans",
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                       ),
-                    ),
+                      Flexible(
+                        child: Text(
+                          "${widget.note != null ? widget.note : ""}",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: "sans",
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 25.0, left: 15),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Web Address: ",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                          fontFamily: "sans",
+                        ),
+                      ),
+                      Flexible(
+                        child: InkWell(
+                          onTap: () {
+                            Get.to(HomePage(
+                              url: widget.webAdress,
+                            ));
+                          },
+                          child: Text(
+                            "${widget.webAdress != null ? widget.webAdress : ""}",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: "sans",
+                              fontWeight: FontWeight.w400,
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 25.0, left: 15),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Additional Note: ",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: "sans",
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                      Flexible(
+                        child: Text(
+                          "${widget.addnote != null ? widget.addnote : ""}",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: "sans",
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ],
         ),
