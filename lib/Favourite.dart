@@ -100,19 +100,19 @@ class _FavouriteState extends State<Favourite> {
                 height: 400,
                 width: 700,
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 25.0),
-                child: Center(
-                  child: Text(
-                    "PREFERITA",
-                    style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontFamily: "sans"),
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(top: 25.0),
+              //   child: Center(
+              //     child: Text(
+              //       "PREFERITA",
+              //       style: TextStyle(
+              //           fontSize: 28,
+              //           fontWeight: FontWeight.bold,
+              //           color: Colors.white,
+              //           fontFamily: "sans"),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),

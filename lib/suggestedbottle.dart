@@ -208,31 +208,27 @@ class _SuggestedbottleState extends State<Suggestedbottle> {
                 ),
               ))
           : PreferredSize(
-              preferredSize: Size.fromHeight(250),
+              preferredSize: Size.fromHeight(300),
               child: AppBar(
-                backgroundColor: Colors.transparent,
+                  iconTheme: IconThemeData(
+                    color: Colors.black, //change your color here
+                  ),
+                backgroundColor: Colors.white,
                 flexibleSpace: Stack(
                   children: [
-                    Image(
-                      image: widget.type == "redgrap"
-                          ? AssetImage('assets/files/red.jpeg')
-                          : widget.type == "redcount"
-                              ? AssetImage("assets/files/red.jpeg")
-                              : AssetImage("assets/files/white.jpeg"),
-                      fit: BoxFit.fill,
-                      height: 600,
-                      width: 700,
+                    Center(
+                      child: Image(
+                        image: widget.type == "redgrap"
+                            ? AssetImage('assets/files/red.png')
+                            : widget.type == "redcount"
+                                ? AssetImage("assets/files/red.png")
+                                : AssetImage("assets/files/white.png"),
+                        // fit: BoxFit.fill,
+                        // height: 600,
+                        // width: 700,
+                      ),
                     ),
-                    // Center(
-                    //   child: Text(
-                    //     "LE AZIENDE",
-                    //     style: TextStyle(
-                    //         fontSize: 28,
-                    //         fontWeight: FontWeight.bold,
-                    //         color: Colors.white,
-                    //         fontFamily: "sans"),
-                    //   ),
-                    // ),
+                    
                   ],
                 ),
               )),

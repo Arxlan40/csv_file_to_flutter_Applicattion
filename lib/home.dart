@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:spreadsheet/Favourite.dart';
-import 'package:spreadsheet/test.dart';
+import 'package:spreadsheet/HomePage.dart';
 
 import 'Country.dart';
 import 'ProducerList.dart';
@@ -66,7 +66,7 @@ class HomeWine extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(right: 35.0),
                         child: Image.asset(
-                          "assets/files/red.jpeg",
+                          "assets/files/red.png",
                           height: 70,
                         ),
                       ),
@@ -121,7 +121,7 @@ class HomeWine extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(right: 35.0),
                         child: Image.asset(
-                          "assets/files/white.jpeg",
+                          "assets/files/white.png",
                           height: 70,
                         ),
                       ),
@@ -175,7 +175,7 @@ class HomeWine extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(right: 35.0),
                         child: Image.asset(
-                          "assets/files/red.jpeg",
+                          "assets/files/red.png",
                           height: 70,
                         ),
                       ),
@@ -230,7 +230,7 @@ class HomeWine extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(right: 35.0),
                         child: Image.asset(
-                          "assets/files/white.jpeg",
+                          "assets/files/white.png",
                           height: 70,
                         ),
                       ),
@@ -284,7 +284,7 @@ class HomeWine extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(right: 23.0),
                         child: Image.asset(
-                          "assets/files/producers.jpeg",
+                          "assets/files/producers.png",
                           height: 70,
                           width: 80,
                         ),

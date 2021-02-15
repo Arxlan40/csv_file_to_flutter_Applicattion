@@ -145,6 +145,7 @@ class _ProducerDetailState extends State<ProducerDetail> {
       appBar: AppBar(
         backgroundColor: Color(0xFF800000),
         elevation: 5,
+  
         centerTitle: true,
         title: Text(
           "${widget.producer}",

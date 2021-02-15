@@ -77,14 +77,21 @@ class _ProducerListState extends State<ProducerList> {
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(260),
           child: AppBar(
-            backgroundColor: Colors.transparent,
+            iconTheme: IconThemeData(
+              color: Colors.black, //change your color here
+            ),
+            elevation: 1,
+            shadowColor: Colors.white,
+            backgroundColor: Colors.white,
             flexibleSpace: Stack(
               children: [
-                Image(
-                  image: AssetImage('assets/files/producers.jpeg'),
-                  fit: BoxFit.fill,
-                  height: 600,
-                  width: 700,
+                Center(
+                  child: Image(
+                    image: AssetImage('assets/files/producers.png'),
+                    // fit: BoxFit.fill,
+                    // height: 600,
+                    // width: 700,
+                  ),
                 ),
               ],
             ),

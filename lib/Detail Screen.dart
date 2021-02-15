@@ -7,7 +7,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spreadsheet/Webview.dart';
 import 'package:get/get.dart';
-import 'package:spreadsheet/model.dart';
 
 const String kFileName = 'winefav.json';
 
