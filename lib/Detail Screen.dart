@@ -78,7 +78,7 @@ class _DetailScreenState extends State<DetailScreen> {
 
     // 0. Check whether the _file exists
     _fileExists = await _filePath.exists();
-    print('0. File exists? $_fileExists');
+    print(widget.serial);
 
     // If the _file exists->read it: update initialized _json by what's in the _file
     if (_fileExists) {
@@ -120,17 +120,39 @@ class _DetailScreenState extends State<DetailScreen> {
         "Serial": widget.serial,
       }
     ];
-    print('1.(_writeJson) _newJson: $_newJson');
+    print('1.(_writeJson) _newJson: ');
 
     //2. Update _json by adding _newJson<Map> -> _json<Map>
+    // print('2.(_writeJson) _json(updated): $_json');
     _json.addAll(_newJson);
-    print('2.(_writeJson) _json(updated): $_json');
 
-    //3. Convert _json ->_jsonString
     _jsonString = jsonEncode(_json);
-    print('3.(_writeJson) _jsonString: $_jsonString\n - \n');
+    // // print('3.(_writeJson) _jsonString: $_jsonString\n - \n');
 
-    //4. Write _jsonString to the _filePath
+    // //4. Write _jsonString to the _filePath
+    _filePath.writeAsString(_jsonString);
+  }
+
+  void _deletejson() async {
+    // Initialize the local _filePath
+    //final _filePath = await _localFile;
+
+    //1. Create _newJson<Map> from input<TextField>
+
+    //2. Update _json by adding _newJson<Map> -> _json<Map>
+    // print('2.(_writeJson) _json(updated): $_json');
+    // _json.addAll(_newJson);
+    List data = _json;
+
+    data.removeWhere((m) => m['Serial'] == widget.serial);
+
+    // _json.remove((key) => _newJson.toList());
+    //3. Convert _json ->_jsonString
+    // print("ssss sss$data ssss");
+    _jsonString = jsonEncode(data);
+    // // print('3.(_writeJson) _jsonString: $_jsonString\n - \n');
+
+    // //4. Write _jsonString to the _filePath
     _filePath.writeAsString(_jsonString);
   }
 
@@ -164,47 +186,104 @@ class _DetailScreenState extends State<DetailScreen> {
               child: widget.fav
                   ? SizedBox()
                   : _favourite
-                      ? Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Icon(
+                      ? IconButton(
+                          onPressed: () async {
+                            SharedPreferences localStorage =
+                                await SharedPreferences.getInstance();
+
+                            setState(() {
+                              _favourite = false;
+                            });
+                            localStorage.remove(widget.serial);
+
+                            _deletejson();
+                            final file = await _localFile;
+                            _fileExists = await file.exists();
+                            _readJson();
+
+                            Fluttertoast.showToast(
+                                msg: "Rimosso dai preferiti");
+                          },
+                          icon: Icon(
                             Icons.favorite,
                             color: Colors.red,
                             size: 40,
                           ),
                         )
                       : serialnumber == widget.serial
-                          ? Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Icon(
-                                Icons.favorite,
-                                color: Colors.red,
-                                size: 40,
-                              ),
-                            )
-                          : IconButton(
+                          ? IconButton(
                               onPressed: () async {
                                 SharedPreferences localStorage =
                                     await SharedPreferences.getInstance();
 
                                 setState(() {
-                                  _favourite = true;
+                                  _favourite = false;
                                 });
+                                localStorage.remove(widget.serial);
 
-                                localStorage.setString(
-                                    widget.serial, widget.serial);
-
-                                _writeJson();
+                                _deletejson();
                                 final file = await _localFile;
                                 _fileExists = await file.exists();
+                                _readJson();
+
                                 Fluttertoast.showToast(
-                                    msg: "Aggiunto ai preferiti");
+                                    msg: "Rimosso dai preferiti");
                               },
                               icon: Icon(
-                            Icons.favorite_outline,
+                                Icons.favorite,
                                 color: Colors.red,
                                 size: 40,
                               ),
-                            ),
+                            )
+                          : _favourite == false && serialnumber == null
+                              ? IconButton(
+                                  onPressed: () async {
+                                    SharedPreferences localStorage =
+                                        await SharedPreferences.getInstance();
+
+                                    setState(() {
+                                      _favourite = true;
+                                    });
+
+                                    localStorage.setString(
+                                        widget.serial, widget.serial);
+
+                                    _writeJson();
+                                    final file = await _localFile;
+                                    _fileExists = await file.exists();
+                                    Fluttertoast.showToast(
+                                        msg: "Aggiunto ai preferiti");
+                                  },
+                                  icon: Icon(
+                                    Icons.favorite_outline,
+                                    color: Colors.red,
+                                    size: 40,
+                                  ),
+                                )
+                              : IconButton(
+                                  onPressed: () async {
+                                    SharedPreferences localStorage =
+                                        await SharedPreferences.getInstance();
+
+                                    setState(() {
+                                      _favourite = true;
+                                    });
+
+                                    localStorage.setString(
+                                        widget.serial, widget.serial);
+
+                                    _writeJson();
+                                    final file = await _localFile;
+                                    _fileExists = await file.exists();
+                                    Fluttertoast.showToast(
+                                        msg: "Aggiunto ai preferiti");
+                                  },
+                                  icon: Icon(
+                                    Icons.favorite_outline,
+                                    color: Colors.red,
+                                    size: 40,
+                                  ),
+                                ),
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

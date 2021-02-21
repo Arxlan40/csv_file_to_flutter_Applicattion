@@ -96,7 +96,28 @@ class _ProducerDetailState extends State<ProducerDetail> {
       }
     }
   }
+  void _deletejson() async {
+    // Initialize the local _filePath
+    //final _filePath = await _localFile;
 
+    //1. Create _newJson<Map> from input<TextField>
+
+    //2. Update _json by adding _newJson<Map> -> _json<Map>
+    // print('2.(_writeJson) _json(updated): $_json');
+    // _json.addAll(_newJson);
+    List data = _json;
+
+    data.removeWhere((m) => m['Serial'] == widget.serial);
+
+    // _json.remove((key) => _newJson.toList());
+    //3. Convert _json ->_jsonString
+    // print("ssss sss$data ssss");
+    _jsonString = jsonEncode(data);
+    // // print('3.(_writeJson) _jsonString: $_jsonString\n - \n');
+
+    // //4. Write _jsonString to the _filePath
+    _filePath.writeAsString(_jsonString);
+  }
   void _writeJson() async {
     // Initialize the local _filePath
     //final _filePath = await _localFile;
@@ -156,52 +177,111 @@ class _ProducerDetailState extends State<ProducerDetail> {
       body: SingleChildScrollView(
         child: Stack(
           children: [
-            Positioned(
-              right: 30,
-              top: 40,
-              child: _favourite
-                  ? Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.star,
-                        color: Colors.yellow,
-                        size: 40,
-                      ),
-                    )
-                  : serialnumber == widget.serial
-                      ? Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Icon(
-                            Icons.star,
-                            color: Colors.yellow,
-                            size: 40,
-                          ),
-                        )
-                      : IconButton(
-                          onPressed: () async {
-                            SharedPreferences localStorage =
-                                await SharedPreferences.getInstance();
+            // Positioned(
+            //   right: 30,
+            //   top: 40,
+            //   child: widget.fav
+            //       ? SizedBox()
+            //       : _favourite
+            //           ? IconButton(
+            //               onPressed: () async {
+            //                 SharedPreferences localStorage =
+            //                     await SharedPreferences.getInstance();
 
-                            setState(() {
-                              _favourite = true;
-                            });
+            //                 setState(() {
+            //                   _favourite = false;
+            //                 });
+            //                 localStorage.remove(widget.serial);
 
-                            localStorage.setString(
-                                widget.serial, widget.serial);
+            //                 _deletejson();
+            //                 final file = await _localFile;
+            //                 _fileExists = await file.exists();
+            //                 _readJson();
 
-                            _writeJson();
-                            final file = await _localFile;
-                            _fileExists = await file.exists();
-                            Fluttertoast.showToast(
-                                msg: "Aggiunto ai preferiti");
-                          },
-                          icon: Icon(
-                            Icons.star_border,
-                            color: Colors.yellow,
-                            size: 40,
-                          ),
-                        ),
-            ),
+            //                 Fluttertoast.showToast(
+            //                     msg: "Rimosso dai preferiti");
+            //               },
+            //               icon: Icon(
+            //                 Icons.favorite,
+            //                 color: Colors.red,
+            //                 size: 40,
+            //               ),
+            //             )
+            //           : serialnumber == widget.serial
+            //               ? IconButton(
+            //                   onPressed: () async {
+            //                     SharedPreferences localStorage =
+            //                         await SharedPreferences.getInstance();
+
+            //                     setState(() {
+            //                       _favourite = false;
+            //                     });
+            //                     localStorage.remove(widget.serial);
+
+            //                     _deletejson();
+            //                     final file = await _localFile;
+            //                     _fileExists = await file.exists();
+            //                     _readJson();
+
+            //                     Fluttertoast.showToast(
+            //                         msg: "Rimosso dai preferiti");
+            //                   },
+            //                   icon: Icon(
+            //                     Icons.favorite,
+            //                     color: Colors.red,
+            //                     size: 40,
+            //                   ),
+            //                 )
+            //               : _favourite == false && serialnumber == null
+            //                   ? IconButton(
+            //                       onPressed: () async {
+            //                         SharedPreferences localStorage =
+            //                             await SharedPreferences.getInstance();
+
+            //                         setState(() {
+            //                           _favourite = true;
+            //                         });
+
+            //                         localStorage.setString(
+            //                             widget.serial, widget.serial);
+
+            //                         _writeJson();
+            //                         final file = await _localFile;
+            //                         _fileExists = await file.exists();
+            //                         Fluttertoast.showToast(
+            //                             msg: "Aggiunto ai preferiti");
+            //                       },
+            //                       icon: Icon(
+            //                         Icons.favorite_outline,
+            //                         color: Colors.red,
+            //                         size: 40,
+            //                       ),
+            //                     )
+            //                   : IconButton(
+            //                       onPressed: () async {
+            //                         SharedPreferences localStorage =
+            //                             await SharedPreferences.getInstance();
+
+            //                         setState(() {
+            //                           _favourite = true;
+            //                         });
+
+            //                         localStorage.setString(
+            //                             widget.serial, widget.serial);
+
+            //                         _writeJson();
+            //                         final file = await _localFile;
+            //                         _fileExists = await file.exists();
+            //                         Fluttertoast.showToast(
+            //                             msg: "Aggiunto ai preferiti");
+            //                       },
+            //                       icon: Icon(
+            //                         Icons.favorite_outline,
+            //                         color: Colors.red,
+            //                         size: 40,
+            //                       ),
+            //                     ),
+            // ),
             Column(
               children: [
                 // ListTile(

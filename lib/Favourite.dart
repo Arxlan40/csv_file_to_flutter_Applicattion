@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Detail Screen.dart';
 import 'model.dart';
 
@@ -31,6 +32,29 @@ class _FavouriteState extends State<Favourite> {
   Future<File> get _localFile async {
     final path = await _localPath;
     return File('$path/$kFileName');
+  }
+
+  void _deletejson(String serial) async {
+    // Initialize the local _filePath
+    //final _filePath = await _localFile;
+
+    //1. Create _newJson<Map> from input<TextField>
+
+    //2. Update _json by adding _newJson<Map> -> _json<Map>
+    // print('2.(_writeJson) _json(updated): $_json');
+    // _json.addAll(_newJson);
+    List data = _json;
+
+    data.removeWhere((m) => m['Serial'] == serial);
+
+    // _json.remove((key) => _newJson.toList());
+    //3. Convert _json ->_jsonString
+    // print("ssss sss$data ssss");
+    _jsonString = jsonEncode(data);
+    // // print('3.(_writeJson) _jsonString: $_jsonString\n - \n');
+
+    // //4. Write _jsonString to the _filePath
+    _filePath.writeAsString(_jsonString);
   }
 
   List<Red> reddata;
@@ -191,7 +215,33 @@ class _FavouriteState extends State<Favourite> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(
-                                          top: 20.0, right: 10),
+                                          top: 5.0, right: 10),
+                                      child: IconButton(
+                                        icon: Icon(
+                                          Icons.remove_circle,
+                                          color: Colors.red,
+                                        ),
+                                        onPressed: () async {
+                                          SharedPreferences localStorage =
+                                              await SharedPreferences
+                                                  .getInstance();
+
+                                          localStorage
+                                              .remove(reddata[index].serial);
+
+                                          _deletejson(reddata[index].serial);
+                                          final file = await _localFile;
+                                          _fileExists = await file.exists();
+                                          _readJson();
+
+                                          Fluttertoast.showToast(
+                                              msg: "Rimosso dai preferiti");
+                                        },
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 15.0, right: 10),
                                       child: Icon(
                                         Icons.arrow_forward_ios,
                                         color: Colors.grey,
