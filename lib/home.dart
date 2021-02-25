@@ -325,7 +325,7 @@ class HomeWine extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  "Favourite List",
+                                  "Favourite Lists",
                                   style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
@@ -337,12 +337,12 @@ class HomeWine extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                          padding: const EdgeInsets.only(right: 40.0),
-                          child: Icon(
-                            Icons.favorite,
-                            color: Color(0xFF800000),
-                            size: 50,
-                          )),
+                        padding: const EdgeInsets.only(right: 35.0),
+                        child: Image.asset(
+                          "assets/files/white.png",
+                          height: 70,
+                        ),
+                      ),
                       Padding(
                         padding: const EdgeInsets.only(top: 20.0, right: 10),
                         child: Icon(
